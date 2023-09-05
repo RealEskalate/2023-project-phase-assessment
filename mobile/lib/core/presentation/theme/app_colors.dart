@@ -11,6 +11,8 @@ abstract class AppColors {
 
   static const gray100 = Color(0xFFF8FAFF);
   static const gray200 = Color(0xFFD7DDEB);
+  static const gray300 = Color(0xFF979EA5);
 
   static const red = Color(0xFFCC3926);
+  static const yellow = Color(0xFFFFDF00);
 }
