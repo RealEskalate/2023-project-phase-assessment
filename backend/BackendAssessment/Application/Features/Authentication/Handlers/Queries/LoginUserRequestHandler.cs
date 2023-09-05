@@ -3,11 +3,11 @@ using Application.Contracts.Infrastructure;
 using Application.Contracts.Persistence;
 using Application.Features.Authentication.Dtos;
 using Application.Features.Authentication.Dtos.Validators;
+using Application.Features.Authentication.Requests.Queries;
 using AutoMapper;
 using MediatR;
-using SocialSync.Application.Features.Authentication.Requests.Queries;
 
-namespace SocialSync.Application.Features.Authentication.Handlers.Queries;
+namespace Application.Features.Authentication.Handlers.Queries;
 
 public class LoginUserRequestHandler
     : IRequestHandler<LoginUserRequest, CommonResponse<LoggedInUserDto>>

@@ -31,7 +31,7 @@ public class DeleteCategoryCommandHandler
             );
         }
 
-        if (await _unitOfWork.UserRepository.ExistsAsync(request.UserId))
+        if (await _unitOfWork.UserRepository.UserIsAdminAsync(request.UserId))
         {
             return CommonResponse<Unit>.FailureWithError(
                 "Category deletion failed",

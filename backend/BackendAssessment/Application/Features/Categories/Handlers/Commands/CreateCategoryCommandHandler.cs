@@ -45,11 +45,11 @@ public class CreateCategoryCommandHandler
         }
 
         var createdCategory = _mapper.Map<Category>(request.CreateCategoryDto);
-        var categoryId = await _unitOfWork.CategoryRepository.AddAsync(createdCategory);
+        var category= await _unitOfWork.CategoryRepository.AddAsync(createdCategory);
 
         if (await _unitOfWork.SaveAsync() > 0)
         {
-            return new CommonResponse<int> {};
+            return CommonResponse<int>.Success(category.Id);
         }
         else
         {

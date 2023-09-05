@@ -2,7 +2,7 @@ using Application.Common.Responses;
 using Application.Features.Authentication.Dtos;
 using MediatR;
 
-namespace SocialSync.Application.Features.Authentication.Requests.Commands;
+namespace Application.Features.Authentication.Requests.Commands;
 
 public class RegisterUserCommand : IRequest<CommonResponse<LoggedInUserDto>>
 {

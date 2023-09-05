@@ -1,3 +1,4 @@
+using Application.Features.Authentication.Dtos;
 using Application.Features.Categories.Dtos;
 using Application.Features.Products.Dtos;
 using AutoMapper;
@@ -14,5 +15,9 @@ public class MappingProfile : Profile
 
         CreateMap<Category, CategoryDto>();
         CreateMap<CategoryDto, Category>();
+
+        CreateMap<RegisterUserDto, User>();
+        CreateMap<User, UserDto>();
+        CreateMap<UserDto, User>();
     }
 }

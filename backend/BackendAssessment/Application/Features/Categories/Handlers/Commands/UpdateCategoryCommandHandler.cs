@@ -25,7 +25,7 @@ public class UpdateCategoryCommandHandler
         CancellationToken cancellationToken
     )
     {
-        var dtoValidator = new CategoryDtoValidator();
+        var dtoValidator = new UpsertCategoryDtoValidator();
         var validationResult = dtoValidator.Validate(request.UpdateCategoryDto);
 
         if (validationResult.IsValid == false)

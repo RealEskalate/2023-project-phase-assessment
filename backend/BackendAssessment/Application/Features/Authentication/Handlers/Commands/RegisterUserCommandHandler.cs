@@ -3,12 +3,12 @@ using Application.Contracts.Infrastructure;
 using Application.Contracts.Persistence;
 using Application.Features.Authentication.Dtos;
 using Application.Features.Authentication.Dtos.Validators;
+using Application.Features.Authentication.Requests.Commands;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
-using SocialSync.Application.Features.Authentication.Requests.Commands;
 
-namespace SocialSync.Application.Features.Authentication.Handlers.Queries;
+namespace Application.Features.Authentication.Handlers.Queries;
 
 public class RegisterUserCommandHandler
     : IRequestHandler<RegisterUserCommand, CommonResponse<LoggedInUserDto>>
