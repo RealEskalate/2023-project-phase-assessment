@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { useParams } from "next/navigation"
+import { useGetDoctorProfileQuery } from "@/store/apiSlice"
 
 const Details = () => {
     const id = useParams()
@@ -7,7 +8,7 @@ const Details = () => {
 
   return (
         {
-            doctors?.data.map((doctor)=>{
+            doctors?.data.map((doctor:any)=>{
                 <div className="flex flex-col max-h-screen">
                     <div className="w-[1268px] h-[288px] pt-8 flex flex-col">
             <Image src = "/images/manik.svg" width={1268} height= {288} alt=""/>
