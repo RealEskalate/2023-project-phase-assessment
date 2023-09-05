@@ -20,6 +20,23 @@ public class CategoryController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet("{CategoryId:int}")]
+    public async Task<IActionResult> GetCategoryId(int CategoryId, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
+    {
+        var command = new GetCategoryByIdRequest() { Id = CategoryId };
+        var category = await _mediator.Send(command);
+        return ResponseHandler<Category>.HandleResponse(category, 200);
+    }
+
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll( [FromQuery] string? tag,
+        [FromQuery] int? pageNumber, [FromQuery] int? pageSize){
+        var command = new GetAllCategoryRequest(){ PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10 };
+        var posts = await _mediator.Send(command);
+        return ResponseHandler<List<CategoryListDTO>>.HandleResponse(posts, 200);
+    }
     // [HttpGet("User/{userId:int}")]
     // public async Task<IActionResult> GetUserPosts(int userId, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
     // {

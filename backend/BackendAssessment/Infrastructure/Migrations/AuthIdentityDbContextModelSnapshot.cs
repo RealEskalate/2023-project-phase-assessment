@@ -51,6 +51,9 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicaionUserId")
+                        .HasColumnType("text");
+
                     b.Property<int>("Availability")
                         .HasColumnType("integer");
 
@@ -74,9 +77,9 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ApplicaionUserId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
                 });
@@ -279,21 +282,17 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entites.Product", b =>
                 {
+                    b.HasOne("Domain.Entities.ApplicaionUser", null)
+                        .WithMany("Products")
+                        .HasForeignKey("ApplicaionUserId");
+
                     b.HasOne("Domain.Entites.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.ApplicaionUser", "User")
-                        .WithMany("Products")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

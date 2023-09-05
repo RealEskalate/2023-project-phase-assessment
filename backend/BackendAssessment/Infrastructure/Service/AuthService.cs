@@ -83,6 +83,7 @@ public class AuthService : IAuthService {
          }
          if (await _roleManager.RoleExistsAsync("USER") == false)
          {
+             Console.WriteLine("Role Not Found ------------- Role");
              await _roleManager.CreateAsync(new ApplicationRole{Name = "USER"});
              await _roleManager.CreateAsync(new ApplicationRole{Name = "ADMIN"});
          }
@@ -117,12 +118,51 @@ public class AuthService : IAuthService {
          return jwtToken;
      }
 
-     public Task<AuthResponse> TokenValidator(string token){
-         throw new NotImplementedException();
+     public async Task<AuthResponse> TokenValidator(string token){
+         var tokenHandler = new JwtSecurityTokenHandler();
+         var jwtToken = tokenHandler.ReadJwtToken(token);
+    
+         // Get the values of the claims
+         var id = jwtToken.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+         var username = jwtToken.Claims.FirstOrDefault(c => c.Type == "username")?.Value;
+         var email = jwtToken.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+         var role = jwtToken.Claims.FirstOrDefault(c => c.Type == "role")?.Value;
+         
+         if (id is null || username is null || email is null || role is null)
+         {
+             throw new BadRequestException("Invalid token");
+         }
+         
+            var user = await _userManager.FindByIdAsync(id);
+            if (user is null)
+            {
+                throw new BadRequestException("Invalid token");
+            }
+    
+         // Create and return an AuthResponse object with the claim values
+         var authResponse = new AuthResponse
+         {
+             Id = id,
+             Username = username,
+             Email = email,
+             Role = role
+         };
+         return authResponse;
+        
      }
      
-     public Task<string> GetUserRole(string token){
-         throw new NotImplementedException();
+     public async Task<string> GetUserRole(string id){
+         var user = await _userManager.FindByIdAsync(id);
+         // if (user == null)
+         // {
+         //     throw new NotFoundException(n,$"User with ID {id} not found.");
+         // }
+         var roles = await _userManager.GetRolesAsync(user);
+         if (roles == null || roles.Count == 0)
+         {
+             throw new NotFoundException(nameof(ApplicaionUser),$"No roles found for user with ID {id}.");
+         }
+         return roles[0];
      }
 
      // public async Task<bool> Update(UpdateUserDTO request, string prevEmail){

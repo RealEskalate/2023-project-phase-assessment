@@ -19,39 +19,41 @@ public class ProductController : ControllerBase
         _mediator = mediator;
     }
 
-    // [HttpGet("User/{userId:int}")]
-    // public async Task<IActionResult> GetUserPosts(int userId, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
-    // {
-    //     var command = new GetUserPostRequest() { Id = userId, PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10 };
-    //     var posts = await _mediator.Send(command);
-    //     return ResponseHandler<List<PostDto>>.HandleResponse(posts, 200);
-    // }
+    [HttpGet("{ProductId:int}")]
+    public async Task<IActionResult> GetUserPosts(int ProductId, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
+    {
+        var command = new GetProductByIdRequest() { ProductId = ProductId };
+        var posts = await _mediator.Send(command);
+        return ResponseHandler<ProductDetailDTO>.HandleResponse(posts, 200);
+    }
 
-    
-    
-    // [HttpGet]
-    // public async Task<IActionResult> GetPosts([FromQuery] string? search, [FromQuery] string? tag,  [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
-    // {
-    //
-    //     if (!string.IsNullOrEmpty(search))
-    //     {
-    //         var command = new GetByContenetRequest() { Contenet = search, PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10 };
-    //         var posts = await _mediator.Send(command);
-    //         return ResponseHandler<List<PostDto>>.HandleResponse(posts, 200);
-    //     }
-    //     else if (!string.IsNullOrEmpty(tag))
-    //     {
-    //         var command = new GetByTagRequest { Tag = tag, PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10 };
-    //         var posts = await _mediator.Send(command);
-    //         return ResponseHandler<List<PostDto>>.HandleResponse(posts, 200);
-    //     }
-    //     else
-    //     {
-    //         var command = new GetFollowingPostRequest{Id = int.Parse(User.FindFirst("reader")?.Value ?? "-1"), PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10};
-    //         var posts = await _mediator.Send(command);
-    //         return ResponseHandler<List<PostDto>>.HandleResponse(posts, 200);
-    //     }
-    // }
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetPosts([FromQuery] string? search, [FromQuery] string? tag,  [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
+    {
+        var command = new GetAllProductRequest() { PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10 };
+        var posts = await _mediator.Send(command);
+        return ResponseHandler<List<ProductListDTO>>.HandleResponse(posts, 200);
+        // if (!string.IsNullOrEmpty(search))
+        // {
+        //     var command = new GetByContenetRequest() { Contenet = search, PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10 };
+        //     var posts = await _mediator.Send(command);
+        //     return ResponseHandler<List<PostDto>>.HandleResponse(posts, 200);
+        // }
+        // else if (!string.IsNullOrEmpty(tag))
+        // {
+        //     var command = new GetByTagRequest { Tag = tag, PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10 };
+        //     var posts = await _mediator.Send(command);
+        //     return ResponseHandler<List<PostDto>>.HandleResponse(posts, 200);
+        // }
+        // else
+        // {
+        //     var command = new GetFollowingPostRequest{Id = int.Parse(User.FindFirst("reader")?.Value ?? "-1"), PageNumber = pageNumber ?? 0, PageSize = pageSize ?? 10};
+        //     var posts = await _mediator.Send(command);
+        //     return ResponseHandler<List<PostDto>>.HandleResponse(posts, 200);
+        // }
+    }
     
    
     
