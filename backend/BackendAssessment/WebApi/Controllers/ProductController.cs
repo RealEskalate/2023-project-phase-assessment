@@ -30,6 +30,14 @@ namespace WebApi.Controllers
             return ResponseHandler<ProductDto>.HandleResponse(product, 200);
         }
 
+        [HttpGet("byCategory/{categoryId}")]
+        public async Task<IActionResult> GetProductsByCategoryId(int categoryId)
+        {
+            var query = new GetProductsByCategoryIdRequest{ CategoryId = categoryId };
+            var product = await _mediator.Send(query);
+            return ResponseHandler<List<ProductDto>>.HandleResponse(product, 200);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] ProductDto createProductDto)
         {
