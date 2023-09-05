@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTOs.ProductDTOs;
 
-namespace Application.Contracts
+namespace Application.Contracts.Persistence
 {
-    internal class IProductRepository
+    public interface IProductRepository
     {
+        Task<IEnumerable<ProductDTO>> GetAllProductsAsync();
+        Task<ProductDTO> GetProductByIdAsync(int productId);
+        Task<ProductDTO> CreateProductAsync(ProductCreationDTO createProductDto);
+        Task<ProductDTO> UpdateProductAsync(int productId, ProductUpdateDTO updateProductDto);
+        Task<bool> DeleteProductAsync(int productId);
+        Task<IEnumerable<ProductDTO>> SearchProductsAsync(ProductSearchDTO searchDto);
     }
 }
