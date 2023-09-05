@@ -64,10 +64,13 @@ class MovieDetailScreen extends StatelessWidget {
               SizedBox(height: 20.h),
 
               // title
-              Text(
-                movie.title,
-                textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.titleLarge,
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  movie.title,
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
               ),
 
               // summary
@@ -83,15 +86,21 @@ class MovieDetailScreen extends StatelessWidget {
                 ],
               ),
 
+              SizedBox(height: 10.h),
+
               // Description
               Text(movie.description),
 
+              SizedBox(height: 30.h),
+
               // watch now
               SizedBox(
+                  width: AppDimensions.width,
+                  height: 60.h,
                   child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Watch Now'),
-              ))
+                    onPressed: () {},
+                    child: const Text('Watch Now'),
+                  ))
             ],
           ),
         ),
