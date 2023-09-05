@@ -9,5 +9,5 @@ abstract class MovieRepository {
   Future<Either<Failure, List<Movie>>> filterMovies(String query);
   Future<Either<Failure, Movie>> bookMarkMovie(Movie movie);
   Future<Either<Failure, Movie>> unBookMarkMovie(Movie movie);
-  Future<Either<Failure, List<Movie>>> getBookmarkedMovies();
+  Future<Either<Failure, List<Movie>>> getBookMarkedMovies();
 }
