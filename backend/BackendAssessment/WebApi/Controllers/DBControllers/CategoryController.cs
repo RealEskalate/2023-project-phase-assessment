@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.DTO.Category;
+using Application.DTOs.Category;
 using Application.Features.Categories.Request.Command;
 using Application.Features.Categories.Request.Query;
 using MediatR;
@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{categoryId}")]
-        public async Task<ActionResult<CategoryDTO>> GetCategoryById(Guid categoryId)
+        public async Task<ActionResult<CategoryDto>> GetCategoryById(Guid categoryId)
         {
             var query = new GetCategoryByIdRequest { Id = categoryId };
             var category = await _mediator.Send(query);
@@ -35,7 +35,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateCategory(CategoryDTO createCategoryDTO)
+        public async Task<ActionResult> CreateCategory(CategoryDto createCategoryDTO)
         {
             var command = new CreateCategoryCommand { categoryDTO = createCategoryDTO };
             await _mediator.Send(command);
@@ -44,7 +44,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{categoryId}")]
-        public async Task<ActionResult> UpdateCategory(CategoryDTO updateCategoryDTO)
+        public async Task<ActionResult> UpdateCategory(CategoryDto updateCategoryDTO)
         {
 
             var command = new UpdateCategoryCommand { categoryDTO = updateCategoryDTO };

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.DTO.User;
+using Application.DTOs.User;
 using Application.Features.Users.Request.Command;
 using Application.Features.Users.Request.Query;
 using MediatR;
@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetUserDTO>>> GetAllUsers()
+        public async Task<ActionResult<List<GetUserDto>>> GetAllUsers()
         {
             var request = new GetAllUsersRequest();
             var result = await _mediator.Send(request);
@@ -29,7 +29,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetUserDTO>> GetUserById(Guid id)
+        public async Task<ActionResult<GetUserDto>> GetUserById(Guid id)
         {
             var request = new GetUserByIdRequest { Id = id };
             var result = await _mediator.Send(request);
@@ -43,7 +43,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(Guid id, UpdateUserDTO updateUserDTO)
+        public async Task<IActionResult> UpdateUser(Guid id, UpdateUserDto updateUserDTO)
         {
             if (id != updateUserDTO.Id)
             {
@@ -57,7 +57,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CreateUserDTO>> CreateUser(CreateUserDTO createUserDTO)
+        public async Task<ActionResult<CreateUserDto>> CreateUser(CreateUserDto createUserDTO)
         {
             var command = new CreateUserCommand { CreateUserDTO = createUserDTO };
             var result = await _mediator.Send(command);

@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
           <PrivateAssets>all</PrivateAssets>
@@ -21,6 +22,10 @@
         <Content Include="..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
+		
+		<ProjectReference Include="..\Application\Application.csproj" />
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+		
     </ItemGroup>
 
     <ItemGroup>

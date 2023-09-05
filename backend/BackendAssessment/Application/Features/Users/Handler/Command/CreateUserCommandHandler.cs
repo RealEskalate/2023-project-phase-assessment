@@ -19,7 +19,7 @@ namespace Application.Features.Users.Handler.Command
         }
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var userEntity = _mapper.Map<User>(request.CreateUserDto);
+            var userEntity = _mapper.Map<User>(request.CreateUserDTO);
             await _userRepository.Add(userEntity);
 
             return Unit.Value;
