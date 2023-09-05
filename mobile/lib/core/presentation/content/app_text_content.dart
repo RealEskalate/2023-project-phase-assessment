@@ -1,9 +1,8 @@
+import '../../../features/onboarding/presentation/screens/onboarding_screen.dart';
+
 abstract final class AppTextContent {
-  static final onboardingScreen = [
-    {
-      'title': 'Streaming movie and TV. Watch instantly',
-      'description':
-          'Enjoy all our favorite films and TV shows on your streaming devices'
-    },
-  ];
+  static const onboardingScreenTitle =
+      'Streaming movie and TV. Watch instantly';
+  static const onboardingScreenDescription =
+      'Enjoy all our favorite films and TV shows on your streaming devices';
 }
