@@ -1,16 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{5B75826B-28A2-4E66-B68B-1A42991444DD}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{5B75826B-28A2-4E66-B68B-1A42991444DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{02E1ECE2-8D4A-4D75-9C15-242D6276433F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{02E1ECE2-8D4A-4D75-9C15-242D6276433F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{558280CE-8818-4890-8BF6-1A2E4AA31F78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{558280CE-8818-4890-8BF6-1A2E4AA31F78}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02E1ECE2-8D4A-4D75-9C15-242D6276433F} = {02E1ECE2-8D4A-4D75-9C15-242D6276433F}
+		{27CAD1A7-67B7-473A-BAC8-F752FF7069B6} = {27CAD1A7-67B7-473A-BAC8-F752FF7069B6}
+		{5A527206-9C1F-4497-BDFC-4984D438CA2D} = {5A527206-9C1F-4497-BDFC-4984D438CA2D}
+		{5B75826B-28A2-4E66-B68B-1A42991444DD} = {5B75826B-28A2-4E66-B68B-1A42991444DD}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{5A527206-9C1F-4497-BDFC-4984D438CA2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{5A527206-9C1F-4497-BDFC-4984D438CA2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{27CAD1A7-67B7-473A-BAC8-F752FF7069B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{27CAD1A7-67B7-473A-BAC8-F752FF7069B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests", "Application.Tests\Application.Tests.csproj", "{47D2C823-5215-4030-891E-6F913B376EEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Tests", "Application.Tests\Application.Tests.csproj", "{47D2C823-5215-4030-891E-6F913B376EEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +51,11 @@ Global
 		{47D2C823-5215-4030-891E-6F913B376EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47D2C823-5215-4030-891E-6F913B376EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47D2C823-5215-4030-891E-6F913B376EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBB576B8-ADEF-47B6-A1B0-8EECA4F444DF}
 	EndGlobalSection
 EndGlobal
