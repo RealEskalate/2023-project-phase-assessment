@@ -57,7 +57,7 @@ public class UpdateProductCommandHandlerTest
     [Fact]
     public async Task Invalid_UpdateNewProduct()
     {
-        var invalidProductDto = new ProductDto { Name = null, Price = 0, };
+        var invalidProductDto = new ProductDto { Name = null!, Price = 0, };
 
         var updateProductCommand = new UpdateProductCommand
         {

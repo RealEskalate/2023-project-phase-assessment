@@ -40,10 +40,13 @@ public class GenericRepository<T> : IGenericRepository<T>
         return entity!;
     }
 
-    public async Task UpdateAsync(Guid id, T entity)
+    public Task UpdateAsync(Guid id, T entity)
     {
+
         _dbContext.Entry(entity).State = EntityState.Modified;
+        return Task.CompletedTask;
     }
+
 
     public async Task<List<T>> GetAsync()
     {

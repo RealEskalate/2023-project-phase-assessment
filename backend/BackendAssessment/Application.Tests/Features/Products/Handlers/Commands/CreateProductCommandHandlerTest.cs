@@ -59,7 +59,7 @@ public class CreateProductCommandHandlerTest
     [Fact]
     public async Task Invalid_CreateNewProduct()
     {
-        var invalidProductDto = new ProductDto { Name = null, Price = 0, };
+        var invalidProductDto = new ProductDto {Name = null!,Price = 0, };
 
         var createProductCommand = new CreateProductCommand
         {
