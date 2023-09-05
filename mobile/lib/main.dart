@@ -9,11 +9,9 @@ import "package:mobile/injection/injection_container.dart" as di;
 void main() async {
   await di.init();
 
-  runApp(DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MultiBlocProvider(providers: [
-            BlocProvider(create: (context) => HomeBloc()),
-          ], child: const MyApp())));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (context) => HomeBloc()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
