@@ -11,6 +11,8 @@ public interface IUserService
     public Task UpdateUser(UpdateUserDto user);
     // delete the user
     public Task DeleteUser(string id);
+    public Task<bool> IsAdmin();
+    public string UserId { get; }
     
     public Task<bool> Exists(string userId);
 }

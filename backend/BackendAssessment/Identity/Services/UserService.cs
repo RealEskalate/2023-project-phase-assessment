@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Application.Common;
 using Application.Contracts.Identity;
 using Application.DTOs.User;
 using Application.Exceptions;
@@ -14,12 +15,26 @@ public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IAuthService _authService;
-    public UserService(UserManager<ApplicationUser> userManager, IAuthService authService)
+    private readonly IHttpContextAccessor _contextAccessor;
+    public UserService(UserManager<ApplicationUser> userManager, IAuthService authService, IHttpContextAccessor contextAccessor)
     {
         _userManager = userManager;
         _authService = authService;
+        _contextAccessor = contextAccessor;
     }
 
+    // get the current user
+    public string? UserId => _contextAccessor.HttpContext!.User.FindFirstValue(CustomClaimTypes.Uid);
+
+    public async Task<bool> IsAdmin()
+    {
+        // get the user by id
+        var user = await _userManager.FindByIdAsync(UserId);
+        if(user == null)
+            throw new NotFoundException("User", UserId);
+
+        return await  _userManager.IsInRoleAsync(user, "Administrator");
+    }
 
     public async Task<User> GetUserById(string userId)
     {

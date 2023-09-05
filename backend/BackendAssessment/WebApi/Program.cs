@@ -2,6 +2,7 @@ using Application;
 using Identity;
 using Infrastructure;
 using Microsoft.OpenApi.Models;
+using Persistence;
 using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureIdentityServices(builder.Configuration);
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
-// builder.Services.ConfigurePersistenceServices(builder.Configuration);
+builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 // add swagger documentation
 AddSwaggerDoc(builder.Services);
