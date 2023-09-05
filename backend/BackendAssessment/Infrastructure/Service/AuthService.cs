@@ -20,11 +20,12 @@ public class AuthService : IAuthService {
      private readonly RoleManager<ApplicationRole> _roleManager;
      private readonly JwtSetting _jwtSettings; 
     
-     public AuthService(UserManager<ApplicaionUser> userManager,SignInManager<ApplicaionUser> signInManager, IOptions<JwtSetting> jwtSettings) 
+     public AuthService(UserManager<ApplicaionUser> userManager,SignInManager<ApplicaionUser> signInManager, IOptions<JwtSetting> jwtSettings, RoleManager<ApplicationRole> roleManager) 
      { 
          _userManager = userManager; 
          _signInManager = signInManager; 
          _jwtSettings = jwtSettings.Value; 
+         _roleManager = roleManager;
           
      } 
      
