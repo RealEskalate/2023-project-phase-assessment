@@ -1,18 +1,22 @@
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:mobile/core/network/network_info.dart';
-import 'package:mobile/features/movie/domain/use_cases/use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core/network/network_info.dart';
 import '../features/movie/data/data_sources/local_data_source.dart';
 import '../features/movie/data/data_sources/local_data_source_impl.dart';
 import '../features/movie/data/data_sources/remote_data_source.dart';
 import '../features/movie/data/data_sources/remote_data_source_impl.dart';
 import '../features/movie/data/repositories/movie_repository_implementation.dart';
 import '../features/movie/domain/repositories/movie_repository.dart';
+import '../features/movie/domain/use_cases/bookmark_movie.dart';
+import '../features/movie/domain/use_cases/get_all_movies.dart';
+import '../features/movie/domain/use_cases/get_bookmarked_movies.dart';
+import '../features/movie/domain/use_cases/get_movie_detail.dart';
+import '../features/movie/domain/use_cases/remove_movie_from_bookmark.dart';
+import '../features/movie/domain/use_cases/search_movie.dart';
 import '../features/movie/presentation/bloc/movie_bloc.dart';
-
-import 'package:http/http.dart' as http;
 
 GetIt getIt = GetIt.instance;
 
