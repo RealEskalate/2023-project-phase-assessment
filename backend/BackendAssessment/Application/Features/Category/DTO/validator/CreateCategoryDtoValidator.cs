@@ -5,11 +5,11 @@ namespace BackendAssessment.Application.Features.Category.DTO.validator;
 
 public class CreateCategoryDtoValidator: AbstractValidator<CreateCategoryDto>
 {
-    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateCategoryDtoValidator(IUnitOfWork unitOfWork)
+
+    public CreateCategoryDtoValidator()
     {
-        _unitOfWork = unitOfWork;
+       
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required")
             .NotNull()

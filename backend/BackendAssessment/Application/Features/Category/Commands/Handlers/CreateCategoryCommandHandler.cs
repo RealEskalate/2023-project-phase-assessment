@@ -2,6 +2,7 @@ using AutoMapper;
 using BackendAssessment.Application.Common.Responses;
 using BackendAssessment.Application.Contracts.Persistence;
 using BackendAssessment.Application.Features.Category.Commands.Requests;
+using BackendAssessment.Application.Features.Category.DTO.validator;
 using BackendAssessment.Application.Features.Product.Commands.Requests;
 using BackendAssessment.Application.Features.Product.DTO.Validator;
 using MediatR;
@@ -28,7 +29,7 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
     public async Task<CommonResponse<int>> Handle(CreateCategoryCommand command, CancellationToken cancellationToken)
     {
         var response = new CommonResponse<int>();
-        var Validator = new CreateProductDtoValidator();
+        var Validator = new CreateCategoryDtoValidator();
 
         var validationResult = await Validator.ValidateAsync(command.createCategoryDto);
 
@@ -40,9 +41,9 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
 
         else
         {
-            var product = _mapper.Map<Domain.Entities.Product>(command.createProductDto);
-            var CreatedProduct = await _unitOfWork.ProductRepository.AddAsync(
-                product
+            var category = _mapper.Map<Domain.Entities.Category>(command.createCategoryDto);
+            var CreatedProduct = await _unitOfWork.CategoryRepository.AddAsync(
+                category
             );
             if (await _unitOfWork.SaveAsync() > 0)
             {

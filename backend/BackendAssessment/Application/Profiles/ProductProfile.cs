@@ -11,7 +11,6 @@ public class ProductProfile : Profile
     {
         CreateMap<CreateProductDto, Product>().ReverseMap();
         CreateMap<Product, CreateProductDto>().ReverseMap();
-        CreateMap<User, RegisterUserDto>().ReverseMap();
-        CreateMap<RegisterUserDto, User>().ReverseMap();
+        
     }
 }
