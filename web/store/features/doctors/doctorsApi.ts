@@ -29,10 +29,20 @@ export const doctorsApi = createApi({
         // },
       }),
     }),
+    searchDoctors: builder.mutation<any, any>({
+      query: (keyword) => ({
+        url: `/search?keyword=${keyword}&institutions=false&articles=False`,
+        method: 'POST',
+        // body: {
+        //   institutions: false,
+        //   articles: false,
+        // },
+      }),
+    }),
     getSingleDoctor: builder.query<any, any>({
       query: (id) => `/users/doctorProfile/${id}`,
     })
   }),
 });
 
-export const { useGetDoctorsQuery, useGetSingleDoctorQuery } = doctorsApi;
+export const { useGetDoctorsQuery, useGetSingleDoctorQuery, useSearchDoctorsMutation } = doctorsApi;
