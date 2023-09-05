@@ -22,6 +22,5 @@ class Movie {
     this.isBookmarked = false,
   });
 
-  
-  
+
 }
