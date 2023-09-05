@@ -5,8 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/presentation/theme/app_colors.dart';
 import '../../../../core/presentation/theme/app_theme.dart';
 import '../../domain/entities/movie.dart';
-import '../widgets/movie_card.dart';
-import '../widgets/search_bar.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final Movie? movie;
