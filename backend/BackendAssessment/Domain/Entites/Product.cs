@@ -11,4 +11,5 @@ public class Product : BaseEntity
 
     public virtual User User { get; set; } = null!;
     public virtual ICollection<Category> Categories { get; set; } = null!;
+    public virtual ICollection<Booking> Bookings { get; set; } = null!;
 }
