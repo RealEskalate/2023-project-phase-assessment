@@ -1,6 +1,6 @@
 import {createApi,fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const authApi = createApi({
+const doctorsApi = createApi({
     reducerPath: 'doctors-api',
     baseQuery:fetchBaseQuery({baseUrl:'https://hakimhub-api-dev-wtupbmwpnq-uc.a.run.app/api/v1/'}),
     endpoints: (build)=>({
