@@ -13,4 +13,15 @@
         <PackageReference Include="MediatR" Version="12.0.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\Auth\Commands\" />
+      <Folder Include="Features\Auth\Queries\" />
+      <Folder Include="Features\User\Commands\" />
+      <Folder Include="Features\User\Queries\" />
+    </ItemGroup>
 </Project>
