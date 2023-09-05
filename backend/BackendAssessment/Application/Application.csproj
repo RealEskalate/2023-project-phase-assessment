@@ -10,7 +10,36 @@
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1"/>
         <PackageReference Include="File.TypeChecker" Version="4.0.0"/>
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
         <PackageReference Include="MediatR" Version="12.0.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5"/>
+        <PackageReference Include="MoonSharp" Version="2.0.0" />
+        <PackageReference Include="Moq" Version="4.20.69" />
+        <PackageReference Include="Shouldly" Version="4.2.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.0-preview4" />
+        <PackageReference Include="xunit" Version="2.5.1-pre.26" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.1-pre.11">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\Catagory\Handler\Queries\" />
+      <Folder Include="Features\Catagory\Request\Queries\" />
+      <Folder Include="Features\Product\Handler\Queries\" />
+      <Folder Include="Features\Product\Request\Queries\" />
+      <Folder Include="Features\User\Handler\Command\" />
+      <Folder Include="Features\User\Handler\Queries\" />
+      <Folder Include="Features\User\Request\Commands\" />
+      <Folder Include="Features\User\Request\Queries\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Features\User\Request\Commands\CreateUserCommand.cs" />
     </ItemGroup>
 </Project>
