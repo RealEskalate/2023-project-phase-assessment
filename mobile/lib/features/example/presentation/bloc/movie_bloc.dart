@@ -10,41 +10,42 @@ part 'movie_event.dart';
 part 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
-  MovieBloc() : super(MovieInitial()) {
-    
+  GetMoviesUsercase? getMoviesUsercase;
+  SearchMovieUsecase? searchMovieUsecase;
+  SetBookMarkUsecase? setBookMarkUsecase;
+  GetBookMarkUsecase? getBookMarkUsecase;
+
+  MovieBloc(
+     this.getMoviesUsercase,
+     this.searchMovieUsecase,
+     this.setBookMarkUsecase,
+     this.getBookMarkUsecase,
+  ) : super(MovieInitial()) {
     on<GetMovies>(onGetMovies);
 
     on<SearchMovies>((event, emit) async {
       emit(MovieSearching());
-      MovieRepoImpl repo = MovieRepoImpl();
-      SearchMovieUsecase searchMovieUsecase = SearchMovieUsecase(repo);
-      final result = await searchMovieUsecase(event.s);
+      final result = await searchMovieUsecase!(event.s);
       result.fold((l) => emit(Error(message: l.message)),
           (r) => emit(MovieSearched(r)));
     });
-    
-    on<BookMarkMovie>((event, emit) async {
-      MovieRepoImpl repo = MovieRepoImpl();
-      SetBookMarkUsecase setBookMarkUsecase = SetBookMarkUsecase(repo);
-      final result = await setBookMarkUsecase(event.movie);
 
-      result.fold((l) => emit(Error(message: l.message)),
-          (r) => null );
+    on<BookMarkMovie>((event, emit) async {
+      final result = await setBookMarkUsecase!(event.movie);
+
+      result.fold((l) => emit(Error(message: l.message)), (r) => null);
     });
   }
 
   void onGetMovies(event, emit) async {
-      emit(MovieLoading());
-      MovieRepoImpl repo = MovieRepoImpl();
-      GetMoviesUsercase getMoviesUsercase = GetMoviesUsercase(repo);
-      GetBookMarkUsecase getBookMarkUsecase = GetBookMarkUsecase(repo);
-      final result = await getMoviesUsercase();
-      final result2 = await getBookMarkUsecase();
-      List<Movie> bl = [];
-      result2.fold((l) => emit(Error(message: l.message)), (r) {
-        bl = r;
-      });
-      result.fold((l) => emit(Error(message: l.message)),
-          (r) => emit(MovieLoaded(r, bl)));
-    }
+    emit(MovieLoading());
+    final result = await getMoviesUsercase!();
+    final result2 = await getBookMarkUsecase!();
+    List<Movie> bl = [];
+    result2.fold((l) => emit(Error(message: l.message)), (r) {
+      bl = r;
+    });
+    result.fold((l) => emit(Error(message: l.message)),
+        (r) => emit(MovieLoaded(r, bl)));
+  }
 }

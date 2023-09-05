@@ -3,9 +3,13 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:mobile/features/example/presentation/bloc/movie_bloc.dart";
 import "./features/example/presentation/screens/home.dart";
 import "./features/example/presentation/screens/detail.dart";
+
 import "./features/example/presentation/screens/onboarding.dart";
+import './injection/injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setup();
   runApp(const MyApp());
 }
 
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MovieBloc()..add(GetMovies()),
+      create: (context) => sl<MovieBloc>(),
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,

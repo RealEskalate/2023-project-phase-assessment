@@ -8,8 +8,10 @@ import 'package:mobile/features/example/domain/entities/movie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RemoteDataSourceImpl extends RemoteDataSource {
-  final http.Client client = http.Client();
+  final http.Client client;
   static const String key = 'stored_movies';
+
+  RemoteDataSourceImpl(this.client);
 
   @override
   Future<Either<Failure, List<Movie>>> getMovies() async {
@@ -36,12 +38,6 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
       return Left(Failure(message: error.toString()));
     }
-  }
-
-  @override
-  Future<Either<Failure, List<Movie>>> movieDetail(String id) {
-    // TODO: implement movieDetail
-    throw UnimplementedError();
   }
 
   @override
@@ -74,7 +70,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   @override
   Future<Either<Failure, List<Movie>>> getBookMarks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? movieJsonList =  prefs.getStringList(key);
+    List<String>? movieJsonList = prefs.getStringList(key);
     if (movieJsonList != null) {
       List<Movie> movies = movieJsonList.map((movieJson) {
         Map<String, dynamic> movieMap = jsonDecode(movieJson);
@@ -92,8 +88,8 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       Set<String> storedMovies = prefs.getStringList(key)?.toSet() ?? {};
       storedMovies.add(jsonEncode(movie.toJson()));
       await prefs.setStringList(key, storedMovies.toList());
-      return Right(unit);;
-      
+      return Right(unit);
+      ;
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }
