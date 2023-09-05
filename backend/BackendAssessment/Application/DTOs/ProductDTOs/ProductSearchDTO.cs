@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.ProductDTOs
 {
-    internal class ProductSearchDTO
+    public class ProductSearchDTO
     {
+        public string Name { get; set; }
+        public string Category { get; set; }
     }
 }

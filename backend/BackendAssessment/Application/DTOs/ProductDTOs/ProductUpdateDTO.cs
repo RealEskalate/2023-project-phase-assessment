@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.ProductDTOs
 {
-    internal class ProductUpdateDTO
+    public class ProductUpdateDTO
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Pricing { get; set; }
+        public int Availability { get; set; }
     }
 }
