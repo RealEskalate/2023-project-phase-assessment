@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/features/movie/presentation/screens/home_screens.dart';
+import 'package:mobile/features/movie/presentation/screens/detail_screen.dart';
 import 'package:mobile/features/onboarding/presentation/screens/splash_screen.dart';
+import 'package:mobile/features/movie/presentation/screens/home_screens.dart';
 
 class MovieApp extends StatelessWidget {
   const MovieApp({super.key});
@@ -12,7 +13,8 @@ class MovieApp extends StatelessWidget {
     final GoRouter _router =
         GoRouter(navigatorKey: GlobalKey<NavigatorState>(), routes: [
       GoRoute(path: '/splash', builder: (context, state) => SplashScreen()),
-      GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
+      GoRoute(path: '/', builder: (context, state) => DetailScreen()),
+      GoRoute(path: '/home', builder: (context, state) =>  HomeScreen()),
     ]);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
