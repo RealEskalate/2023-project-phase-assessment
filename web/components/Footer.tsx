@@ -2,9 +2,9 @@ export default function Footer() {
   // todo: apply ui and icos
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex justify-between m-5">
         <div>HakimHub</div>
-        <div className="flex justify-between">
+        <div className="flex justify-between m-5">
           <div>
             <p>get connected</p>
             <p>For Physicians</p>

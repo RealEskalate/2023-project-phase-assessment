@@ -28,7 +28,7 @@ export default function Home() {
     content = <p>error</p>
   }
   else if (isSuccess){
-    content = {data.map((detail)=> (<Link href=`/doctors/${detail._id}`><Card fullName={detail.fullName}) speciality={detail.speciality} 
+    content = {data.map((detail)=> (<Link key={detail._id} href=`/doctors/${detail._id}`><Card fullName={detail.fullName}) speciality={detail.speciality} 
     institutionID_list={detail.institutionID_list}
     photo={photo}/></Link>)}
   }

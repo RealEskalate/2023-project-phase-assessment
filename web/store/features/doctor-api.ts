@@ -1,7 +1,7 @@
 import { doctorDetail } from "@/types/doctor-detail.model";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const Url = "https://hakimhub-api-dev-wtupbmwpnq-uc.a.run.app/api/v1";
-//hakimhub-api-dev-wtupbmwpnq-uc.a.run.app/api/v1/
+
 https: export const doctorApi = createApi({
   reducerPath: "doctorApi",
   baseQuery: fetchBaseQuery({
