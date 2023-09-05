@@ -7,7 +7,7 @@ using ProductHub.Application.Features.Categories.Commands.Requests;
 using ProductHub.Application.Features.Categories.Queries.Requests;
 using ProductHub.Domain.Entities;
 
-namespace YourNamespace.Controllers
+namespace ProductHub.WebApi.Controllers
 {
     [Route("api/categories")]
     [ApiController]
