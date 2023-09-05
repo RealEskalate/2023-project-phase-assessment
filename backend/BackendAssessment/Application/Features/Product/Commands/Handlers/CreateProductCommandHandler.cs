@@ -29,12 +29,12 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
         var response = new CommonResponse<int>();
         var Validator = new CreateProductDtoValidator();
 
-        var validationResult = Validator.ValidateAsync(command.createProductDto);
+        var validationResult = await Validator.ValidateAsync(command.createProductDto);
 
-        if (!validationResult.Result.IsValid)
+        if (!validationResult.IsValid)
         {
             return CommonResponse<int>.FailureWithError(message: "failed to create product",
-                error: validationResult.Result.Errors.Select(x => x.ErrorMessage).ToList());
+                error: validationResult.Errors.Select(x => x.ErrorMessage).ToList());
         }
 
         else

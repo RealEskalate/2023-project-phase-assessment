@@ -25,12 +25,12 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
         var response = new CommonResponse<int>();
         var Validator = new UpdateProductDtoValidator(_unitOfWork);
 
-        var validationResult = Validator.ValidateAsync(command.updateProductDto);
+        var validationResult = await Validator.ValidateAsync(command.updateProductDto);
 
-        if (!validationResult.Result.IsValid)
+        if (!validationResult.IsValid)
         {
             return CommonResponse<int>.FailureWithError(message: "failed to update product",
-                error: validationResult.Result.Errors.Select(x => x.ErrorMessage).ToList());
+                error: validationResult.Errors.Select(x => x.ErrorMessage).ToList());
         }
 
         else

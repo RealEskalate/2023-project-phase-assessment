@@ -22,12 +22,12 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand,
         var response = new CommonResponse<int>();
         var Validator = new DeleteProductDtoValidator(_unitOfWork);
 
-        var validationResult = Validator.ValidateAsync(command.deleteProductDto);
+        var validationResult = await Validator.ValidateAsync(command.deleteProductDto);
 
-        if (!validationResult.Result.IsValid)
+        if (!validationResult.IsValid)
         {
             return CommonResponse<int>.FailureWithError(message: "failed to update product",
-                error: validationResult.Result.Errors.Select(x => x.ErrorMessage).ToList());
+                error: validationResult.Errors.Select(x => x.ErrorMessage).ToList());
         }
 
         else
