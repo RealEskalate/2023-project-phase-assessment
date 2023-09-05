@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/presentation/theme/app_colors.dart';
 import '../../../../core/presentation/theme/app_theme.dart';
 import '../../domain/entities/movie.dart';
-import '../widgets/bookmarked_card.dart';
 import '../widgets/movie_card.dart';
 import '../widgets/search_bar.dart';
 
@@ -45,61 +44,10 @@ class MoviesSearchScreen extends StatelessWidget {
               CustomSearchBar(),
               SizedBox(height: 20.h),
 
-              // Title
-              Row(
-                children: [
-                  Text(
-                    'Saved Movies',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  SizedBox(width: 5.w),
-                  GestureDetector(
-                    child: const Icon(
-                      Icons.bookmark_border,
-                      color: AppColors.blue,
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(
-                height: 25,
-              ),
-              // Bookmarked list
-
-              SizedBox(
-                width: AppDimensions.width,
-                height: 300.h,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: BookmarkedCard(
-                        movie: movie,
-                      ),
-                    );
-                  },
-                ),
-              ),
-
               const SizedBox(
                 height: 25,
               ),
 
-              Row(
-                children: [
-                  Text(
-                    'All Movies',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ],
-              ),
-
-              const SizedBox(
-                height: 25,
-              ),
               // All movies list
               SizedBox(
                 width: AppDimensions.width,
@@ -121,9 +69,5 @@ class MoviesSearchScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void bookmarkedMoviesBuilder(BuildContext context, List<Movie> movies) {
-    // return
   }
 }

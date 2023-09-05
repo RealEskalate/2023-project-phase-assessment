@@ -5,7 +5,6 @@ import '../../../../core/presentation/theme/app_colors.dart';
 import '../../../../core/presentation/theme/app_theme.dart';
 import '../../domain/entities/movie.dart';
 import '../widgets/bookmarked_card.dart';
-import '../widgets/custom_text_field.dart';
 import '../widgets/movie_card.dart';
 import '../widgets/search_bar.dart';
 
