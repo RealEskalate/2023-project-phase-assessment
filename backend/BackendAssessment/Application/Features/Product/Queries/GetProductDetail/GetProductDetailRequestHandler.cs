@@ -21,7 +21,7 @@ namespace Application.Features.Product.Queries.GetProductDetail
         }
         public async Task<ProductDetailsDto> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
         {
-            var product = await _unitOfWork.ProductRepository.Get(request.Id);
+            var product = await _unitOfWork.ProductRepository.GetProductWithDetails(request.Id);
             
             if (product == null)
                 throw new NotFoundException(nameof(Domain.Entites.Products.Product), request.Id);

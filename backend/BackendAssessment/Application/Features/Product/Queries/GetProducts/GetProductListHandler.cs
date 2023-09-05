@@ -19,7 +19,7 @@ namespace Application.Features.Product.Queries.GetProducts
 
         public async Task<List<ProductDetailsDto>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
         {
-            var products = await _unitOfWork.ProductRepository.GetAll();
+            var products = await _unitOfWork.ProductRepository.GetProductWithDetails();
             var productDetailsDto = _mapper.Map<List<ProductDetailsDto>>(products);
             return productDetailsDto;
         }
