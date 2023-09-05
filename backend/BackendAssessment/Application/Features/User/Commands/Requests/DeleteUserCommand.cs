@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
-namespace Application.Features.User.Commands.Handlers
+namespace Application.Features.User.Commands.Requests
 {
-    internal class DeleteUserCommand
+    public class DeleteUserCommand : IRequest<bool>
     {
+        public int UserId { get; set; }
     }
+
 }

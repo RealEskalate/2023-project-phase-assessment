@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Application.Features.User.Queries.Handlers
+namespace Application.Features
 {
     [Serializable]
     internal class NotFoundException : Exception

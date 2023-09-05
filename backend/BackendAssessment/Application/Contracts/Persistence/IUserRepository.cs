@@ -15,6 +15,8 @@ namespace Application.Contracts.Persistence
         Task<UserDTO> CreateUserAsync(CreateUserDTO createUserDto);
         Task<UserDTO> UpdateUserAsync(int userId, UpdateUserDTO updateUserDto);
         Task<bool> DeleteUserAsync(int userId);
+
+
     }
 
 }
