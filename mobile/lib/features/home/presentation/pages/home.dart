@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/presentation/custom_app_bar.dart';
+import 'package:mobile/features/home/presentation/widgets/saved_movies.dart';
 import 'package:mobile/features/movie_detail/presentation/pages/movie_detail.dart';
 
 import '../../../../core/utils/app_dimension.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool showSaved = true;
   @override
   Widget build(BuildContext context) {
     @override
@@ -53,6 +55,9 @@ class _HomePageState extends State<HomePage> {
                             left: AppDimension.width(10, context)),
                         child: TextField(
                           onSubmitted: (value) {
+                            setState(() {
+                              showSaved = false;
+                            });
                             BlocProvider.of<HomeBloc>(context)
                                 .add(SearchMovies(term: value));
                           },
@@ -79,6 +84,9 @@ class _HomePageState extends State<HomePage> {
                       child: IconButton(
                         icon: const Icon(Icons.search, color: Colors.white),
                         onPressed: () {
+                          setState(() {
+                            showSaved = false;
+                          });
                           BlocProvider.of<HomeBloc>(context)
                               .add(SearchMovies(term: searchController.text));
                         },
@@ -88,20 +96,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            showSaved ? getSavedMovies(state: state) : Container(),
             Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              margin: EdgeInsets.only(bottom: 20),
-              child: Text(
-                "All Movies",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-              ),
-            ),
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 20, bottom: 15, top: 15),
+                child: Text(
+                  "All Movies",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                )),
             getStatus(state: state)
           ]),
         );
       }),
     );
+  }
+
+  Widget getSavedMovies({final state}) {
+    if (state is Loaded) {
+      return SavedMovies(movies: state.movies);
+    }
+    return Container();
   }
 
   Widget getStatus({final state}) {
@@ -114,13 +128,12 @@ class _HomePageState extends State<HomePage> {
       if (state.movies.isEmpty) {
         return Container(
             margin: const EdgeInsets.only(top: 250),
-            child: Text(
+            child: const Text(
               "Couldn't find movies with the given term.",
               style: const TextStyle(fontSize: 18),
             ));
       }
       return Expanded(
-        // height: doube,
         child: ListView.builder(
           itemCount: state.movies.length,
           itemBuilder: (context, index) {
