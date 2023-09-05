@@ -9,6 +9,8 @@ public class ProductHubDbContext : DbContext {
     public virtual DbSet<Category> Categories { get; set; }
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<Booking> Bookings { get; set; }
+
 
     public ProductHubDbContext(DbContextOptions<ProductHubDbContext> options) : base(options) { }
 

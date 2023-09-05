@@ -2,6 +2,7 @@ using Application.Dtos;
 using Domain.Entities;
 using AutoMapper;
 using Application.Dtos.Auth;
+using Application.Dtos.Booking;
 
 namespace Application.Profiles;
 
@@ -24,6 +25,9 @@ public class MappingProfile : Profile{
         CreateMap<UserDto,User>().ReverseMap();
         CreateMap<RegisterUserDto,User>().ReverseMap();
         CreateMap<LoginUserDto,User>().ReverseMap();
-              
+
+        //booking
+        CreateMap<CreateBookingDto,Booking>().ReverseMap();
+        CreateMap<UpdateBookingDto,Booking>().ReverseMap();
     }
 }

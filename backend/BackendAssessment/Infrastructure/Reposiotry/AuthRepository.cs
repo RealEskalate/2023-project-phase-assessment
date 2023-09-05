@@ -17,14 +17,16 @@ public class AuthRepository : IAuthRepository
 
     private readonly IJwtGenerator _jwtGenerator;
     private readonly IUserRepository _userRepository;
+    private readonly RoleManager<IdentityRole> _roleManager;
    
 
-    public AuthRepository(UserManager<ApplicaionUser> userManager, SignInManager<ApplicaionUser> signInManager, IJwtGenerator jwtGenerator,IUserRepository userRepository)
+    public AuthRepository(UserManager<ApplicaionUser> userManager, SignInManager<ApplicaionUser> signInManager, IJwtGenerator jwtGenerator,IUserRepository userRepository, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _jwtGenerator = jwtGenerator;
         _userRepository = userRepository;
+        _roleManager = roleManager;
         
     }
 
@@ -63,8 +65,27 @@ public class AuthRepository : IAuthRepository
             if (!result.Succeeded){
              throw new BadRequestException($"Failed to create user {result.Errors}"); 
          } 
+         
+         
 
          var userToReturn = await _userRepository.GetByEmailAsync(email);
+
+        if(userToReturn!.Id > 2){
+            if (!_roleManager.RoleExistsAsync("user").Result)
+            {
+                var role = new ApplicationRole { Name = "user" };
+                await _roleManager.CreateAsync(role);
+            }
+        }else {
+            if (!_roleManager.RoleExistsAsync("admin").Result){
+
+                var role = new ApplicationRole{Name = "admin"};
+                await _roleManager.CreateAsync(role);
+            }
+        }
+        
+
+            await _userManager.AddToRoleAsync(user, "user");
 
          return await _jwtGenerator.CreateToken(userToReturn!);
     }

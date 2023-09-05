@@ -2,12 +2,14 @@ using Application.Dtos;
 using Application.Features.Cateogory.Commands;
 using Application.Features.Cateogory.Requests;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "admin")]
 public class CategoryController : ControllerBase{
 
     private readonly IMediator _mediator;
