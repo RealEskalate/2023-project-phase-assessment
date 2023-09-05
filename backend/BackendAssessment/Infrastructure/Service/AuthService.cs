@@ -9,7 +9,7 @@ using Application.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Persistence.Model;
+using Domain.Entities;
 
 namespace Persistence.Service;
 
@@ -17,6 +17,7 @@ public class AuthService : IAuthService {
     
      private readonly UserManager<ApplicaionUser> _userManager;
      private readonly SignInManager<ApplicaionUser> _signInManager;
+     private readonly RoleManager<ApplicationRole> _roleManager;
      private readonly JwtSetting _jwtSettings; 
     
      public AuthService(UserManager<ApplicaionUser> userManager,SignInManager<ApplicaionUser> signInManager, IOptions<JwtSetting> jwtSettings) 
@@ -27,7 +28,7 @@ public class AuthService : IAuthService {
           
      } 
      
-     public async Task<AuthResponse?> Login(LoginRequest request) 
+     public async Task<AuthResponse> Login(LoginRequest request) 
      {
          var user = await _userManager.FindByEmailAsync(request.Email);
          
@@ -59,7 +60,7 @@ public class AuthService : IAuthService {
 
      } 
      
-     public async Task<AuthResponse?> Register(RegisterRequest request) 
+     public async Task<AuthResponse> Register(RegisterRequest request) 
      {
          var alreadyExistEmail = await _userManager.FindByEmailAsync(request.Email);
          var alreadyExistUsername = await _userManager.FindByNameAsync(request.UserName);
@@ -80,9 +81,13 @@ public class AuthService : IAuthService {
          {
              throw new BadRequestException($"Failed to create user. Check your password.");
          }
-
+         if (await _roleManager.RoleExistsAsync("USER") == false)
+         {
+             await _roleManager.CreateAsync(new ApplicationRole{Name = "USER"});
+             await _roleManager.CreateAsync(new ApplicationRole{Name = "ADMIN"});
+         }
          // Add the user to the desired role
-         var addToRoleResult = await _userManager.AddToRoleAsync(user, "user");
+         var addToRoleResult = await _userManager.AddToRoleAsync(user, "USER");
          if (!addToRoleResult.Succeeded)
          {
              throw new BadRequestException($"Failed to assign role to the user.");
@@ -110,6 +115,14 @@ public class AuthService : IAuthService {
              signingCredentials: credentialsHashs 
          );
          return jwtToken;
+     }
+
+     public Task<AuthResponse> TokenValidator(string token){
+         throw new NotImplementedException();
+     }
+     
+     public Task<string> GetUserRole(string token){
+         throw new NotImplementedException();
      }
 
      // public async Task<bool> Update(UpdateUserDTO request, string prevEmail){

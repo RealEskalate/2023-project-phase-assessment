@@ -7,7 +7,7 @@ using System.Text;
 using Application.Contracts.Identity;
 using Application.Model;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Model;
+using Domain.Entities;
 using Persistence.Service;
 
 namespace Persistence
@@ -19,7 +19,7 @@ namespace Persistence
             services.Configure<JwtSetting>(configuration.GetSection("JwtSetting")); 
  
             services.AddDbContext<AuthIdentityDbContext>(options => {
-                    options.UseNpgsql(configuration.GetConnectionString("SocialSync"));
+                    options.UseNpgsql(configuration.GetConnectionString("ProductHub"));
                 }
             ); 
  

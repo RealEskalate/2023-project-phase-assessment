@@ -13,7 +13,7 @@ public class ProductHubFactory : IDesignTimeDbContextFactory<AuthIdentityDbConte
             .Build();
 
         var builder = new DbContextOptionsBuilder<AuthIdentityDbContext>();
-        var connectionString = configuration.GetConnectionString("SocialSync");
+        var connectionString = configuration.GetConnectionString("ProductHub");
 
         builder.UseNpgsql(connectionString);
 
