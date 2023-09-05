@@ -11,11 +11,15 @@ https: export const doctorApi = createApi({
     getDoctorDetails: build.query<doctorDetail, string>({
       query: (id) => `/users/doctorProfile/${id}`,
     }),
-    getAllDoctors: build.mutation<{ find: any; page: any }, doctorDetail[]>({
+    getAllDoctors: build.mutation< doctorDetail[],{ find: any; page: any }>({
       query: (find: any, page: any) =>
-        `/search=${find}?institutions=false&from=${page}&size=8`,
+        
+        ({
+            url: `/search=${find}?institutions=false&from=${page}&size=8`, 
+            method: 'POST',
     }),
   }),
 });
+})
 
 export const { useGetDoctorDetailsQuery, useGetAllDoctorsMutation } = doctorApi;
