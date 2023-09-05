@@ -2,9 +2,6 @@ using BackendAssessment.Application.Contracts.Persistence;
 using BackendAssessment.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Moq;
-using SocialSync.Application.Contracts.Persistence;
-using SocialSync.Domain.Entities;
-using SocialSync.Infrastructure.PasswordService;
 
 namespace SocialSync.Application.Tests.Mocks;
 

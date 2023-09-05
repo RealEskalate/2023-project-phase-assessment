@@ -1,6 +1,6 @@
 using BackendAssessment.Application.Contracts.Persistence;
 using Moq;
-using SocialSync.Application.Contracts.Persistence;
+// using SocialSync.Application.Contracts.Persistence;
 
 namespace SocialSync.Application.Tests.Mocks;
 
@@ -11,12 +11,12 @@ public class MockUnitOfWork {
 
     var mockUserRepository = MockUserRepository.GetMockUserRepository();
   
-    var mockPostRepository = MockPostRepository.GetPostRepository();
+   
    
     unitOfWork.Setup(uow => uow.UserRepository).Returns(mockUserRepository.Object);
     unitOfWork.Setup(uow => uow.SaveAsync()).ReturnsAsync(1);
   
-    unitOfWork.Setup(uow => uow.PostRepository).Returns(mockPostRepository.Object);
+    
    
     return unitOfWork;
   }
