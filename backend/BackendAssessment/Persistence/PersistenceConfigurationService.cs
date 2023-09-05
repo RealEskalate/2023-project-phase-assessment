@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-
+using Application.Contracts.Persistence;
+using Persistence.Repositories;
 
 namespace Persistence
 {
@@ -19,12 +20,9 @@ namespace Persistence
                 options.UseNpgsql(configuration.GetConnectionString("ProductHub"));
             });
 
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IPostRepository, PostRepository>();
-            //services.AddScoped<IFollowRepository, FollowRepository>();
-            //services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
             return services;
         }
 
