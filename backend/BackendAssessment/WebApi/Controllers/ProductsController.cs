@@ -5,6 +5,7 @@ using Application.Features.Product.Commands.UpdateProduct;
 using Application.Features.Product.Queries.GetAllProducts;
 using Application.Features.Product.Queries.GetSingleProduct;
 using Application.Features.Product.Queries.GetSingleProductWithOwner;
+using Application.Features.Product.Queries.SearchProductsByNameAndDesc;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Service;
@@ -72,5 +73,15 @@ public class ProductsController : ControllerBase
             ProductOwnerId = await AuthHelper.GetUserId(User),
             ProductDto = productRequestDto
         });
+    }
+    
+    [HttpGet("search")]
+    public async Task<ActionResult<List<ProductResponseDto>>> SearchProductsByName(string name)
+    {
+        var products = await _mediator.Send(new SearchProductsByNameAndDescQuery()
+        {
+            Name = name
+        });
+        return products;
     }
 }

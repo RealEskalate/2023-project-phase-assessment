@@ -23,6 +23,7 @@ namespace WebApi.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<UserResponseDto>> Get(int id)
         {
+            await AuthHelper.OnlyAdminUser(User);
             return await _mediator.Send(new GetSingleUserRequest
             {
                 Id = id
@@ -32,6 +33,7 @@ namespace WebApi.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<List<UserResponseDto>>> GetAllUsers()
         {
+            await AuthHelper.OnlyAdminUser(User);
             var users = await _mediator.Send(new GetAllUsersRequest());
             return users;
         }
