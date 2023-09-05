@@ -4,21 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Identity
 {
-    public class BlogSyncIdentityDbContext : IdentityDbContext<ApplicationUser>
+    public class ProductHubIdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public BlogSyncIdentityDbContext(DbContextOptions<BlogSyncIdentityDbContext> options)
+        public ProductHubIdentityDbContext(DbContextOptions<ProductHubIdentityDbContext> options)
             : base(options)
         {
         }
 
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     base.OnModelCreating(modelBuilder);
-        //
-        //     // modelBuilder.ApplyConfiguration(new RoleConfiguration());
-        //     // modelBuilder.ApplyConfiguration(new UserConfiguration());
-        //     // modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
-        // }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductHubIdentityDbContext).Assembly);
+
+        }
         
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken())
         {

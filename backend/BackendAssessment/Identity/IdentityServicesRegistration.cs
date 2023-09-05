@@ -19,16 +19,16 @@ namespace Identity
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             
             
-            services.AddDbContext<BlogSyncIdentityDbContext>(options => 
-                options.UseNpgsql(configuration.GetConnectionString("SocialSyncDbConnection"),
-                b => b.MigrationsAssembly(typeof(BlogSyncIdentityDbContext).Assembly.FullName)));
+            services.AddDbContext<ProductHubIdentityDbContext>(options => 
+                options.UseNpgsql(configuration.GetConnectionString("ProductHubDbConnection"),
+                b => b.MigrationsAssembly(typeof(ProductHubIdentityDbContext).Assembly.FullName)));
 
             // services.AddIdentity<ApplicationUser, IdentityRole>()
-            //     .AddEntityFrameworkStores<BlogSyncIdentityDbContext>().AddDefaultTokenProviders();
+            //     .AddEntityFrameworkStores<ProductHubIdentityDbContext>().AddDefaultTokenProviders();
 
             // add only one identity that is user in the application there is no admin or other user and should be able to use signin manager
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<BlogSyncIdentityDbContext>()
+                .AddEntityFrameworkStores<ProductHubIdentityDbContext>()
                 .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
 

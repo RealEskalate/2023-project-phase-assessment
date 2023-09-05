@@ -33,12 +33,7 @@ public class UserService : IUserService
                 Id = user.Id,
                 Email = user.Email!,
                 UserName = user.UserName!,
-                Firstname = user.FirstName!,
-                Lastname = user.LastName!,
-                Bio = user.Bio,
-                BirthDate = user.BirthDate,
                 DateCreated = user.DateCreated,
-                ConnectionId = user.ConnectionId!
             };
         throw new NotFoundException("User", userId);
     }
@@ -46,21 +41,17 @@ public class UserService : IUserService
     public async Task UpdateUser(UpdateUserDto user)
     {
         // find the user in the identity database
-        var userToUpdate = _userManager.FindByIdAsync(user.Id.ToString());
+        var userToUpdate = await _userManager.FindByIdAsync(user.Id.ToString());
         
         if (user == null)
             throw new NotFoundException("User", user!.Id);
         
         // assign the values of user to the userToUpdate
-        userToUpdate.Result!.FirstName = user.Firstname;
-        userToUpdate.Result.LastName = user.Lastname;
-        userToUpdate.Result.Bio = user.Bio;
-        userToUpdate.Result.BirthDate = user.BirthDate;
-        userToUpdate.Result.Email = user.Email;
-        userToUpdate.Result.UserName = user.UserName;
+        userToUpdate.Email = user.Email;
+        userToUpdate.UserName = user.UserName;
         
         // update the user
-        var result = await _userManager.UpdateAsync(userToUpdate.Result);
+        var result = await _userManager.UpdateAsync(userToUpdate);
 
         if (!result.Succeeded)
         {
@@ -88,47 +79,8 @@ public class UserService : IUserService
         
         
     }
-
-    public async Task UploadProfilePicture(string userId, byte[] picture)
-    {
-        // check if user is logged in by current user
-        // if (userId != this.userId)
-        //     throw new UnauthorizedAccessException("You are not authorized to perform this action.");
-        // get the user
-        var user = await _userManager.FindByIdAsync(userId);
-
-        if (user == null)    
-        {
-            throw new NotFoundException("User", userId);
-        }
-        
-        // update the user
-        user.ProfilePicture = picture;
-        var result = await _userManager.UpdateAsync(user);
-        
-        if (!result.Succeeded)
-        {
-            var errors = result.Errors.Select(er => er.Description).ToArray();
-            
-            throw new BadRequestException(string.Join(Environment.NewLine, errors));
-        }
-        
-    }
-
-    public async Task<byte[]> GetProfilePicture(string userId)
-    {
-        // get the user
-        var user = await _userManager.FindByIdAsync(userId);
-        
-        if (user == null)
-            throw new NotFoundException("User", userId);
-        
-        if (user.ProfilePicture == null)
-            throw new NotFoundException("Profile Picture", userId);
-        
-        // get the profile picture
-        return user.ProfilePicture;
-    }
+    
+    
 
     public async Task<bool> Exists(string userId)
     {

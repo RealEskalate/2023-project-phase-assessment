@@ -1,7 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Net.Mail;
 using System.Security.Claims;
-using System.Security.Policy;
 using System.Text;
 using Application.Contracts.Email;
 using Application.Contracts.Identity;
@@ -9,7 +7,6 @@ using Application.Exceptions;
 using Application.Models.Email;
 using Application.Models.Identity;
 using Identity.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -89,10 +86,7 @@ namespace Identity.Services
             var user = new ApplicationUser
             {
                 Email = request.Email,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
                 UserName = request.UserName,
-                BirthDate = request.BirthDate,
                 PasswordComfirmation = request.PasswordComfirmation,
             };
             
@@ -100,8 +94,8 @@ namespace Identity.Services
             var mailMessage = new EmailMessage()
             {
                 To = request.Email,
-                Subject = "Welcome to the Social Network",
-                Body = "Welcome to the Social Network",
+                Subject = "Welcome to the Product Hub Network",
+                Body = "Welcome to the Product Hub Network",
             };
          
             await _emailSender.SendEmail(mailMessage);
@@ -111,6 +105,7 @@ namespace Identity.Services
 
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "User");
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 
                 return new RegistrationResponse() { UserId = user.Id , Token = token};
@@ -202,12 +197,8 @@ namespace Identity.Services
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
 
-            var roleClaims = new List<Claim>();
-            
-            for (int i = 0; i < roles.Count; i++)
-            {
-                roleClaims.Add(new Claim(ClaimTypes.Role, roles[i]));
-            }
+            var roleClaims = roles.Select(role => new Claim(ClaimTypes.Role, role)).ToList();
+
             var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
