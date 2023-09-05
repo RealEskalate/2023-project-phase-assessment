@@ -5,7 +5,7 @@ public class Product : BaseEntity
     public decimal Price { get; set; }
     public string Detail {get; set;}
     public bool Booked { get; set; }
-    public int PostedBy { get; set; }
+    public int UserId { get; set; }
     public int CategoryId { get; set; }
 
     public User User {get; set;}

@@ -13,13 +13,12 @@ public class User : BaseEntity
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
+    public string email {get; set;}
 
     public byte[] PasswordHash { get; set; }
 
     public byte[] PasswordSalt { get; set; }
 
     public virtual IEnumerable<Product> Products { get; set; }
-    
-
 }
 
