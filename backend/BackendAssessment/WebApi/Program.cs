@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // User services
-// builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+// builder.Services.trAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Services Registration
 builder.Services

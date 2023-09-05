@@ -1,11 +1,18 @@
 using FluentValidation;
 using ProductHub.Application.Contracts.Persistence;
+using ProductHub.Application.DTOs.CategoryDtos;
+
 
 namespace ProductHub.Application.DTOs.CategoryDtos.Validators;
 
 public class DeleteCategoryDtoValidator : AbstractValidator<DeleteCategoryDto>
 {
     private readonly ICategoryRepository _categoryRepository;
+
+    public DeleteCategoryDtoValidator()
+    {
+    }
+
     public DeleteCategoryDtoValidator(ICategoryRepository categoryRepository)
     {
         _categoryRepository = categoryRepository;

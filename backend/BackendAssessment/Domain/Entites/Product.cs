@@ -6,7 +6,7 @@ public class Product: BaseEntity{
     public string Name{get; set;} =  null!;
     public double Pricing {get; set;} = 0;
     public Availability Availability{get; set;} = Availability.None;
-    public int UserId;
+    public int CreatorId;
     public int CategoryId;
     public virtual User User{get; set;} = null!;
     public virtual Category Category{get; set;} = null!;

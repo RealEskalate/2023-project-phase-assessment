@@ -6,7 +6,7 @@ using ProductHub.Application.Features.Products.Commands.Requests;
 using ProductHub.Application.Features.Products.Queries.Requests;
 using ProductHub.Domain.Entities;
 
-namespace YourNamespace.Controllers
+namespace ProductHub.WebApi.Controllers
 {
     [Route("api/products")]
     [ApiController]

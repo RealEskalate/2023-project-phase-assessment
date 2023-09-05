@@ -37,5 +37,5 @@ namespace ProductHub.Persistence.Repositories;
                 .Where(p => p.Pricing >= startingPrice && p.Pricing <= finalPrice)
                 .ToListAsync();
         }
-    }
+}
 
