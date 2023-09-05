@@ -1,5 +1,20 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Project Name
+# Next.js Project with Redux Toolkit and RTK Queries
+
+# Description
+
+This project is a Next.js implementation of HakimHub that utilizes Redux Toolkit and RTK Queries. It includes a two page website with simple search functionality and the UI is based on the given assessment (assumed to be provided separately).
+
+# Features
+
+Next.js: The project is built using Next.js, a React framework for server-side rendering and static site generation.
+Redux Toolkit: Redux Toolkit is used for efficient state management, providing a simplified API and automatic handling of common Redux patterns.
+RTK Queries: RTK Queries is integrated to handle data fetching and caching, making it easier to manage API calls and data synchronization.
+Simple Search Functionality: The application includes a basic search feature that allows users to search for specific data or content.
+UI Based on Assessment: The user interface (UI) design and components are based on the given assessment, ensuring consistency and adherence to requirements.
+
 ## Getting Started
 
 First, run the development server:
