@@ -1,6 +1,6 @@
 using Application.Dtos.Common;
 
-namespace Application.Contracts;
+namespace Application.Dtos;
 
 public class UpdateUserDto : BaseDto
 {

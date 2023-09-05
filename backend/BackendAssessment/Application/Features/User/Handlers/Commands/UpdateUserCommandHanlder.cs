@@ -22,7 +22,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
     {
         var userToUpdate = _userRepository.GetByIdAsync(request.UpdateUserDto.Id).Result;
         _mapper.Map(request.UpdateUserDto, userToUpdate);
-        await _userRepository.UpdateAsync(userToUpdate);
+        await _userRepository.UpdateAsync(userToUpdate!);
         return Unit.Value;
     }
 }
