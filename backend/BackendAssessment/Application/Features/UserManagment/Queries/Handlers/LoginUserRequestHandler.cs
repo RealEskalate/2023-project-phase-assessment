@@ -5,7 +5,7 @@ using BackendAssessment.Application.Contracts.Infrastructure;
 using BackendAssessment.Application.Contracts.Persistence;
 using BackendAssessment.Application.DTOs.Authentication;
 using BackendAssessment.Application.DTOs.Authentication.Validators;
-using SocialSync.Application.Features.Authentication.Requests.Queries;
+using BackendAssessment.Application.Features.Authentication.Requests.Queries;
 
 namespace BackendAssessment.Application.Features.Authentication.Handlers.Queries;
 

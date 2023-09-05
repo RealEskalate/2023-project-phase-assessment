@@ -28,13 +28,13 @@
 
 using Microsoft.OpenApi.Models;
 using BackendAssessment.Application;
-// using BackendAssessment.Infrastructure;
+using BackendAssessment.Infrastructure;
 using BackendAssessment.Persistence;
 using BackendAssessment.WebApi.Services;
 using BackendAssessment.WebApi.Services.Interfaces;
 
-// using BackendAssessment.WebApi.Services;
-// using BackendAssessment.WebApi.Services.Interfaces;
+using BackendAssessment.WebApi.Services;
+using BackendAssessment.WebApi.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,9 +52,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 // Services Registration
 builder.Services
-    .AddApplication();
-    // .AddInfrastructure(builder.Configuration)
-    // .AddPersistence(builder.Configuration);
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration)
+    .AddPersistence(builder.Configuration);
 builder.Services.AddSwaggerGen(
     c =>  {
         c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using BackendAssessment.Application.DTOs.Authentication;
 using BackendAssessment.Application.Features.UserManagment.Commands.Requests;
-using SocialSync.Application.Features.Authentication.Requests.Queries;
+using BackendAssessment.Application.Features.Authentication.Requests.Queries;
 
 
 namespace BackendAssessment.WebApi.Controller;
