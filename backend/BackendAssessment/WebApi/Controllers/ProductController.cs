@@ -4,6 +4,7 @@ using BackendAssessment.Application.Features.Product.Commands.Requests;
 using BackendAssessment.Application.Features.Product.DTO;
 using BackendAssessment.Application.Features.Product.Queries.Requests;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackendAssessment.API.Controllers
 {
@@ -18,6 +19,7 @@ namespace BackendAssessment.API.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createProductDto)
         {
@@ -31,7 +33,7 @@ namespace BackendAssessment.API.Controllers
 
             return BadRequest(result);
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -45,7 +47,7 @@ namespace BackendAssessment.API.Controllers
 
             return BadRequest(result);
         }
-
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDto updateProductDto)
         {

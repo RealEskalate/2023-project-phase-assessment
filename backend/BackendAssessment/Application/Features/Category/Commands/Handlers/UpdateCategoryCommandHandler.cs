@@ -7,7 +7,7 @@ using MediatR;
 
 namespace BackendAssessment.Application.Features.Category.Commands.Handlers;
 
-public class UpdateCategoryCommandHandler: IRequestHandler<UpdateCategoryCommand, CommonResponse<int>>
+public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, CommonResponse<int>>
 {
     private IUnitOfWork _unitOfWork;
     private IMapper _mapper;
@@ -17,6 +17,7 @@ public class UpdateCategoryCommandHandler: IRequestHandler<UpdateCategoryCommand
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
+
     public async Task<CommonResponse<int>> Handle(UpdateCategoryCommand command, CancellationToken cancellationToken)
     {
         var response = new CommonResponse<int>();
