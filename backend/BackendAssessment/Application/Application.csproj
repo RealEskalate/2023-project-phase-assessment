@@ -7,10 +7,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1"/>
-        <PackageReference Include="File.TypeChecker" Version="4.0.0"/>
-        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
-        <PackageReference Include="MediatR" Version="12.0.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5"/>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="File.TypeChecker" Version="4.0.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="MediatR" Version="12.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Contracts\repository\" />
+      <Folder Include="DTO\Identity\Validation\" />
+      <Folder Include="Features\BookingProduct\Handler\Queries\" />
+      <Folder Include="Features\BookingProduct\Request\Queries\" />
+      <Folder Include="Features\Identity\Handlers\Queries\" />
+      <Folder Include="Features\Identity\Requests\Queries\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 </Project>
