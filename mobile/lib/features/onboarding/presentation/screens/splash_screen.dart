@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -19,10 +20,10 @@ class SplashScreen extends StatelessWidget {
           // White Container with Content
           Positioned(
             bottom: 0, // Adjust as needed
-           
+
             child: Container(
               padding: EdgeInsets.all(20.0),
-              height:300.h,
+              height: 300.h,
               width: 375.w,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -32,7 +33,6 @@ class SplashScreen extends StatelessWidget {
                 ),
               ),
               child: Column(
-                
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
@@ -56,7 +56,8 @@ class SplashScreen extends StatelessWidget {
                     height: 50.w,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Handle the "Start" button press
+                        context.go('/home-page');
+                        print("clicked");
                       },
                       child: Text('Get Started'),
                     ),

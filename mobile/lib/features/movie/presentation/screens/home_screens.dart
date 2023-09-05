@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/features/movie/presentation/bloc/movie_bloc.dart';
 import 'package:mobile/features/movie/presentation/widgets/bookmark_card_widget.dart';
 import 'package:mobile/features/movie/presentation/widgets/movie_card_widget.dart';
 import 'package:mobile/features/movie/presentation/widgets/search_bar_widget.dart';
@@ -7,9 +10,20 @@ import 'package:mobile/features/movie/presentation/widgets/search_bar_widget.dar
 import '../../domain/entities/movie.dart';
 import '../widgets/header_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+ 
+final BuildContext context;
 
+  HomeScreen({Key? key, required this.context}) : super(key: key);
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  void initState() {
+    super.initState();
+    BlocProvider.of<MovieBloc>(widget.context).add(GetAllMoviesEvent());
+  }
   // Define an onTap callback
   void handleHeaderTap() {
     // Handle the tap action here
@@ -46,7 +60,6 @@ class HomeScreen extends StatelessWidget {
       rating: "7.8",
       createdAt: "2023-09-04T16:35:44.676Z",
     ),
-    // Add more movie objects here as needed
   ];
 
   @override
