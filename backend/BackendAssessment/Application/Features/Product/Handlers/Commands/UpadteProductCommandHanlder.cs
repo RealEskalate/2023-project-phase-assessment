@@ -1,4 +1,5 @@
 using Application.Contracts;
+using Application.Exceptions;
 using Application.Features.Prodcut.Requests.Commands;
 using AutoMapper;
 using Domain.Entities;
@@ -21,8 +22,14 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
     public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var productToUpdate = _productRepository.GetByIdAsync(request.UpdateProductDto.Id).Result;
+
+        if (productToUpdate == null)
+        {
+            throw new NotFoundException(nameof(Product), request.UpdateProductDto.Id);
+        }
+
         _mapper.Map<Product>(request.UpdateProductDto);
-       await  _productRepository.UpdateAsync(productToUpdate);
+       await  _productRepository.UpdateAsync(productToUpdate!);
         return Unit.Value;
     }
 }

@@ -15,8 +15,5 @@ public class CreateCategoryDtoValidator : AbstractValidator<CreateCategoryDto>{
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull()
             .MaximumLength(200).WithMessage("{PropertyName} must not exceed 200 characters.");
-        
-        
-        
     }
 }

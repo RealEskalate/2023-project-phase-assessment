@@ -1,6 +1,7 @@
 
 using Application.Contracts;
 using Application.Dtos;
+using Application.Exceptions;
 using Application.Features.User.Requests.Queries;
 using AutoMapper;
 using MediatR;
@@ -20,7 +21,15 @@ public class GetUserByIdRequestHandler : IRequestHandler<GetUserByIdRequest, Use
 
     public async Task<UserDto> Handle(GetUserByIdRequest request, CancellationToken cancellationToken)
     {
+        var DoesExist = await _userRepository.ExistsAsync(request.Id);
+
+        if (!DoesExist)
+        {
+            throw new NotFoundException(nameof(User), request.Id);
+        }
+
         var user = await _userRepository.GetByIdAsync(request.Id);
+
         return _mapper.Map<UserDto>(user);
     }
     

@@ -1,4 +1,5 @@
 using Application.Contracts;
+using Application.Dtos.Product.Valiation;
 using Application.Features.Prodcut.Requests.Commands;
 using AutoMapper;
 using Domain.Entities;
@@ -20,7 +21,8 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     }
     
     public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
-    {
+    {  
+       
         var product = _mapper.Map<Product>(request.CreateProductDto);
        await  _productRepository.AddAsync(product);
         return product.Id;

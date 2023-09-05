@@ -1,6 +1,8 @@
 using Application.Contracts;
+using Application.Exceptions;
 using Application.Features.Prodcut.Requests.Commands;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Prodcut.Handlers.Commands;
@@ -19,7 +21,12 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand,
     public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
         var productToDelete = await _productRepository.GetByIdAsync(request.Id);
-        await _productRepository.DeleteAsync(productToDelete);
+        if (productToDelete == null)
+        {
+            throw new NotFoundException(nameof(Product), request.Id);
+        }
+
+        await _productRepository.DeleteAsync(productToDelete!);
         return Unit.Value;
     }
 }

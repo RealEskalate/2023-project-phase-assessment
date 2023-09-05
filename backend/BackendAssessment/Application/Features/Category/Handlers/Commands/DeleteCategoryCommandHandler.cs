@@ -1,6 +1,8 @@
 using Application.Contracts;
+using Application.Exceptions;
 using Application.Features.Cateogory.Commands;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Cateogory.Handlers.Commands;
@@ -18,9 +20,9 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
     public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
-        var categoryToDelete = await _categoryRepository.GetByIdAsync(request.Id);
-        await _categoryRepository.DeleteAsync(categoryToDelete);
-        
+
+        var categoryToDelete = await _categoryRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException(nameof(Category), request.Id);
+        await _categoryRepository.DeleteAsync(categoryToDelete!);
         return Unit.Value;
     }
 }

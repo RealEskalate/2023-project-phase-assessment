@@ -1,4 +1,5 @@
 using Application.Contracts;
+using Application.Exceptions;
 using Application.Features.User.Requests.Commands;
 using AutoMapper;
 using MediatR;
@@ -20,7 +21,14 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
 
     public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var userToUpdate = _userRepository.GetByIdAsync(request.UpdateUserDto.Id).Result;
+        var DoesExist = _userRepository.ExistsAsync(request.UpdateUserDto.Id).Result;
+        if (!DoesExist)
+        {
+            throw new NotFoundException(nameof(User), request.UpdateUserDto.Id);
+        }
+        
+        var userToUpdate = await _userRepository.GetByIdAsync(request.UpdateUserDto.Id);
+
         _mapper.Map(request.UpdateUserDto, userToUpdate);
         await _userRepository.UpdateAsync(userToUpdate!);
         return Unit.Value;
