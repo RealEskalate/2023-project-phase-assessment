@@ -1,12 +1,17 @@
 import {useGetDoctorByIdQuery} from '@/store/features/doctors/doctors-api'
 
 
-const DoctorPage:React.FC = () = > {
+const DoctorPage:React.FC = ({
+    params: { id },
+  }: {
+    params: { id: string }
+  }) = > {
 
-    const [doctor, isLoading, error] = useGetDoctorByIdQuery()
+    const [doctor, isLoading, error] = useGetDoctorByIdQuery(id)
 
     return (
-        <div>{doctor.name}</div>
+        <div>
+        </div>
     )
 
 }
