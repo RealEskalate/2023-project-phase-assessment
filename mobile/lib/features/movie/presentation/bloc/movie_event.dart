@@ -6,3 +6,9 @@ sealed class MovieEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetAllMoviesEvent extends MovieEvent {
+  final String? searchQuery;
+
+   GetAllMoviesEvent({this.searchQuery = "" });
+}

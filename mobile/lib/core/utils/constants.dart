@@ -1,2 +1,8 @@
 
-const kBaseUrl = '64f0f5c78a8b66ecf77a49b6.mockapi.io';
+const kBaseUrl = 'https://film-db.onrender.com/api/v1';
+
+String getBaseUrl() {
+  return 'https://blog-api-4z3m.onrender.com/api/v1';
+}
+
+String cachedToken = 'token';

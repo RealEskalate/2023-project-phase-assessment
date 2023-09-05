@@ -12,27 +12,6 @@ class MovieRepositoryImp extends MovieRepository {
   MovieRepositoryImp(this._remoteDataSource);
 
   @override
-  ResultVoid createUser({
-    required String category,
-    required String image,
-    required String createdAt,
-  }) async {
-    try {
-      await _remoteDataSource.createUser(
-        category: category,
-        image: image,
-        createdAt: createdAt,
-      );
-      return const Right(null);
-    } on ServerException catch (e) {
-      return Left(ServerFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ));
-    }
-  }
-
-  @override
   ResultFuture<List<Movie>> getMovies() async {
     try {
       final result = await _remoteDataSource.getMovies();
