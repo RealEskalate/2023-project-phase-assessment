@@ -7,8 +7,8 @@ namespace BackendAssessment.Persistence;
 public class BackendAssessmentDbContext : DbContext
 {
     public DbSet<User> Users { get; set; } = null!;
-    public DbSet<Product> Posts { get; set; } = null!;
-    public DbSet<Category> Notifications { get; set; } = null!;
+    public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null!;
 
 
     public BackendAssessmentDbContext(DbContextOptions<BackendAssessmentDbContext> options)

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BackendAssessment.Application.Contracts.Persistence;
+using BackendAssessment.Domain.Entities;
 
 namespace BackendAssessment.Persistence.Repositories;
 
@@ -44,5 +45,11 @@ public class GenericRepository<T> : IGenericRepository<T>
     public async Task<List<T>> GetAsync()
     {
         return await _dbContext.Set<T>().ToListAsync();
+    }
+
+    public async Task<bool> ExistsAsync(int id)
+    {
+        var existingEntity = await _dbContext.Set<T>().FindAsync(id);
+        return existingEntity != null;
     }
 }

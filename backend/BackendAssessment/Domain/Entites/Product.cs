@@ -6,7 +6,7 @@ public class Product : BaseEntity
 {
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public bool Availability { get; set; }
+    public int Availabile { get; set; }
     public int Pricing { get; set; }
     public int UserId { get; set; }
     
