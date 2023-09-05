@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Application.UnitTests.Features.Product.Queries.Handlers
+namespace Application.Tests.Features.CommandTests
 {
 	public class GetProductQueryHandlerTests
 	{
