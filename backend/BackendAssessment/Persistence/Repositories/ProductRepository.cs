@@ -12,4 +12,15 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
         _dbContext = dbContext;
     }
+
+    public new async Task<int> AddAsync(Product entity)
+    {
+        _dbContext.Entry(entity).Collection(p => p.Categories).Load();
+
+        _dbContext.Products.Add(entity);
+
+        await _dbContext.SaveChangesAsync();
+
+        return entity.Id;
+    }
 }

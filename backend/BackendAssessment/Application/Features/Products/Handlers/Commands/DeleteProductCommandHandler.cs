@@ -38,6 +38,14 @@ public class DeleteProductCommandHandler
                 "User cannot delete this product."
             );
         }
+        var deletedProduct = await _unitOfWork.ProductRepository.GetAsync(request.ProductId);
+        if (deletedProduct.UserId != request.UserId)
+        {
+            return CommonResponse<Unit>.FailureWithError(
+                "Product deletion failed.",
+                "User not authorized to delete this product."
+            );
+        }
 
         await _unitOfWork.ProductRepository.DeleteAsync(request.ProductId);
         if (await _unitOfWork.SaveAsync() > 0)
@@ -46,7 +54,7 @@ public class DeleteProductCommandHandler
         }
         else
         {
-            return CommonResponse<Unit>.Failure("product creation failed.");
+            return CommonResponse<Unit>.Failure("product deletion failed.");
         }
     }
 }

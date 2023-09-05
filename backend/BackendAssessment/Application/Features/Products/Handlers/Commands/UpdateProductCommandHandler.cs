@@ -36,19 +36,27 @@ public class UpdateProductCommandHandler
             );
         }
 
-        var createdProduct = _mapper.Map<Product>(request.UpdateProductDto);
+        if (request.UpdateProductDto.UserId != request.UserId)
+        {
+            return CommonResponse<Unit>.FailureWithError(
+                "Product updation failed.",
+                "User not authorized to update this product."
+            );
+        }
+
+        var updatedProduct = _mapper.Map<Product>(request.UpdateProductDto);
         await _unitOfWork.ProductRepository.UpdateAsync(
             request.UpdateProductDto.Id,
-            createdProduct
+            updatedProduct
         );
 
         if (await _unitOfWork.SaveAsync() > 0)
         {
-            return new CommonResponse<Unit> {};
+            return new CommonResponse<Unit> { };
         }
         else
         {
-            return CommonResponse<Unit>.Failure("Product creation failed.");
+            return CommonResponse<Unit>.Failure("Product updation failed.");
         }
     }
 }
