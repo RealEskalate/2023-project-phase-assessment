@@ -26,7 +26,7 @@ public class CreateCategoryCommandHandler
     )
     {
         var dtoValidator = new CategoryDtoValidator();
-        var validationResult = dtoValidator.Validate(request.CreateCategoryDto);
+        var validationResult = await dtoValidator.ValidateAsync(request.CreateCategoryDto);
 
         if (validationResult.IsValid == false)
         {

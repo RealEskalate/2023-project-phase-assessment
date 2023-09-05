@@ -26,7 +26,7 @@ public class UpdateCategoryCommandHandler
     )
     {
         var dtoValidator = new UpsertCategoryDtoValidator();
-        var validationResult = dtoValidator.Validate(request.UpdateCategoryDto);
+        var validationResult = await dtoValidator.ValidateAsync(request.UpdateCategoryDto);
 
         if (validationResult.IsValid == false)
         {

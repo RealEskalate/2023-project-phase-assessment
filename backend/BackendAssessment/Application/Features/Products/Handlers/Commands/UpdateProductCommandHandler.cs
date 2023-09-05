@@ -26,7 +26,7 @@ public class UpdateProductCommandHandler
     )
     {
         var dtoValidator = new ProductDtoValidator(_unitOfWork);
-        var validationResult = dtoValidator.Validate(request.UpdateProductDto);
+        var validationResult = await dtoValidator.ValidateAsync(request.UpdateProductDto);
 
         if (validationResult.IsValid == false)
         {
