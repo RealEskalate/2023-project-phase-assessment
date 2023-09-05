@@ -1,9 +1,6 @@
-namespace Backend.Application.DTOs.Category
+namespace Application.Features.Categories.Dtos;
+
+public class CategoryDto
 {
-    public class CategoryDto
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
-    }
+    public string Name { get; set; } = null!;
 }

@@ -1,13 +1,13 @@
-namespace Backend.Application.DTOs.Product;
+using Application.Common.Dtos;
+using Application.Features.Categories.Dtos;
 
-public class ProductDto
+namespace Application.Features.Products.Dtos;
+
+public class ProductDto : BaseDto, IProductDto
 {
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
-    public string Description { get; set; } = null!;
-    public string Image { get; set; } = null!;
-    public decimal Price { get; set; }
+    public int Price { get; set; }
     public int Quantity { get; set; }
-    public string Category { get; set; } = null!;
-    public string Brand { get; set; } = null!;
+    public Guid UserId { get; set; }
+    public List<CategoryDto> Categories { get; set; } = null!;
 }
