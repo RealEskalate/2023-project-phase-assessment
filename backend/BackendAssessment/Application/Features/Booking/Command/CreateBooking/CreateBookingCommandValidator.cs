@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Features.Booking.Command.CreateBooking;
 
-public class CreateBookingCommandValidator : AbstractValidator<BookingResponse>
+public class CreateBookingCommandValidator : AbstractValidator<CreateBookingCommand>
 {
     public CreateBookingCommandValidator()
     {

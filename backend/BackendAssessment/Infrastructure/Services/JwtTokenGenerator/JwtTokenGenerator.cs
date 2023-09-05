@@ -29,7 +29,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             {
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Email, email),
-                new Claim(ClaimTypes.NameIdentifier, id.ToString())
+                new Claim(ClaimTypes.Sid, id.ToString())
             };
 
             Console.WriteLine(_jwtSettings.Secret);

@@ -1,10 +1,14 @@
+using System.Security.Claims;
+using Application.DTO.Booking;
 using Application.DTO.Product;
+using Application.Features.Booking.Command.CreateBooking;
 using Application.Features.Product.Commands.CreateProduct;
 using Application.Features.Product.Commands.DeleteUser;
 using Application.Features.Product.Commands.UpdateProduct;
 using Application.Features.Product.Queries.GetAllProducts;
 using Application.Features.Product.Queries.GetProductById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -39,6 +43,15 @@ public class ProductControllers : ControllerBase
     {
         var newProd = await _mediator.Send(new CreateProductCommand() {CreateProductDto = prod});
         return CreatedAtAction(nameof(GetById), new{Id = newProd.Id}, newProd);
+    }
+    
+    [Authorize]
+    [HttpPost("Book/{prodId:int}")]
+    public async Task<ActionResult<ProductResponseDto>> Book(int prodId, BookingDto bookingDto)
+    {
+        var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)!.Value;
+        var bookedProd = await _mediator.Send(new CreateBookingCommand() { UserId = int.Parse(userId),BookingDto = bookingDto});
+        return Ok(bookedProd);
     }
     
     [HttpPut("{id}")]
