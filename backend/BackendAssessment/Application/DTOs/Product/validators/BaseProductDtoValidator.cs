@@ -11,9 +11,9 @@ public class BaseProductDtoValidator : AbstractValidator<IProductDto>
             .NotEmpty().WithMessage("Name is required");
         RuleFor(dto => dto.Description)
             .NotEmpty().WithMessage("Description is required");
-        RuleFor(dto => dto.CategoryId)
-            .MustAsync(async (categoryId, token) => 
-                await unitOfWork.CategoryRepository.Exists(categoryId))
-            .WithMessage("Category does not exist");
+        // RuleFor(dto => dto.CategoryId)
+        //     .MustAsync(async (categoryId, token) => 
+        //         await unitOfWork.CategoryRepository.Exists(categoryId))
+        //     .WithMessage("Category does not exist");
     }
 }

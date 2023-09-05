@@ -12,16 +12,16 @@ public class BaseCategoryDtoValidator : AbstractValidator<ICategoryDto>
             .NotEmpty().WithMessage("Name is required");
         RuleFor(dto => dto.Description)
             .NotEmpty().WithMessage("Description is required");
-        RuleFor(dto => dto.UserId)
-            .MustAsync(async (userId, token) =>
-            {
-                var user = await unitOfWork.UserRepository.Get(userId);
-                if (user == null)
-                    return false;
-                if (user.Role != Roles.Admin)
-                    return false;
-
-                return true;
-            }).WithMessage("User must be an admin");
+        // RuleFor(dto => dto.UserId)
+        //     .MustAsync(async (userId, token) =>
+        //     {
+        //         var user = await unitOfWork.UserRepository.Get(userId);
+        //         if (user == null)
+        //             return false;
+        //         if (user.Role != Roles.Admin)
+        //             return false;
+        //
+        //         return true;
+        //     }).WithMessage("User must be an admin");
     }
 }

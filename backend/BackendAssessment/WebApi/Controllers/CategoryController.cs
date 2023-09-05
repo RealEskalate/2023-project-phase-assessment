@@ -18,7 +18,7 @@ public class CategoryController : ControllerBase
         _mediator = mediator;
     }
     [HttpPost]
-    public async Task<IActionResult> CreateCategory(CreateCategoryDto categoryDto)
+    public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto categoryDto)
     {
         var request = new CreateCategoryCommand() { CategoryDto = categoryDto };
         var response = await _mediator.Send(request);
