@@ -51,7 +51,7 @@ export default function Footer() {
             <ul className='mt-3 text-sm flex flex-col space-y-3'>
               {
                 getConnectedLinks.map(link => (
-                  <li>
+                  <li key={ link.title }>
                     <Link href={ link.link }>&gt; { link.title }</Link>
                   </li>
                 ))
@@ -63,7 +63,7 @@ export default function Footer() {
             <ul className='mt-3 text-sm flex flex-col space-y-3'>
               {
                 actionsLinks.map(link => (
-                  <li>
+                  <li key={ link.title }>
                     <Link href={ link.link }>&gt; { link.title }</Link>
                   </li>
                 ))
@@ -75,7 +75,7 @@ export default function Footer() {
             <ul className='mt-3 text-sm flex flex-col space-y-3'>
               {
                 companyLinks.map(link => (
-                  <li>
+                  <li key={ link.title }>
                     <Link href={ link.link }>&gt; { link.title }</Link>
                   </li>
                 ))
@@ -85,11 +85,11 @@ export default function Footer() {
         </div>
       </div>
       <div className='flex justify-between items-center mx-20 text-sm py-4'>
-        <div className='flex space-x-60 text-sm font-semibold'>
+        <div className='flex space-x-40 text-sm font-semibold'>
           <Link href='#'>Privacy Policy</Link>
           <Link href='#'>Terms of Use</Link>
         </div>
-        <div className='flex space-x-16 text-xl'>
+        <div className='flex space-x-9 text-xl'>
           <BsFacebook />
           <FaLinkedinIn />
           <BsInstagram />
