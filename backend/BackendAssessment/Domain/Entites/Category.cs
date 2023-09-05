@@ -1,6 +1,6 @@
 using Assessment.Domain.Common;
 
-namespace Assessment.Domain.Entities;
+namespace Domain.Entites;
 
 public class Category : EntityBase
 {
