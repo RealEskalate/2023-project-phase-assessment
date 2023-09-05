@@ -13,6 +13,19 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        poppins: ['Poppins', 'sans'],
+      },
+      colors: {
+        'custom-gray': '#5A5555',
+        'hakim-gray': '#424242',
+        'hub-red': '#FF7272',
+        'footer-bg': '#7879F1',
+        'button': '#6C63FF',
+        'description': '#686868',
+        'search': '#DCD0D0',
+        'purple': '#7879F1',
+      }
     },
   },
   plugins: [],
