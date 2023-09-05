@@ -13,20 +13,20 @@ class HeaderWidget extends StatelessWidget {
         color: Colors.white, // You can change the background color
       ),
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // Back Arrow Icon
           GestureDetector(
-            onTap: (){},
+            onTap: onBackTap,
             child: Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 30.0,
             ),
           ),
-          SizedBox(width: 16.0), // Add some spacing between the back arrow and text
-          
+          SizedBox(
+              width: 16.0), // Add some spacing between the back arrow and text
+
           // "Alem Cinema" Text
           Text(
             'Alem Cinema',

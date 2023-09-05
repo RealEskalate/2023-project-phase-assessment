@@ -13,17 +13,17 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   final GetMovies _getMovies;
   MovieBloc({
     required GetMovies getMovies,
-  }) :_getMovies = getMovies,
-   super(MovieInitial()) {
+  })  : _getMovies = getMovies,
+        super(MovieInitial()) {
     on<GetAllMoviesEvent>(_getAllMoviesHandler);
   }
 
   FutureOr<void> _getAllMoviesHandler(
       GetAllMoviesEvent event, Emitter<MovieState> emit) async {
     emit(const GettingMovies());
-    
 
     final result = await _getMovies();
+    print(result);
 
     result.fold((failure) => emit(MvovieError(failure.errorMessage)),
         (articles) => emit(MoviesLoaded(articles)));

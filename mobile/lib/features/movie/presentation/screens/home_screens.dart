@@ -27,7 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define an onTap callback
   void handleHeaderTap() {
     // Handle the tap action here
-    print('Header tapped');
+    Navigator.of(context).pop();
+
   }
 
   void searchByName() {
