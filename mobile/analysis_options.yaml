@@ -22,7 +22,9 @@ linter:
   # producing the lint.
   rules:
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    directive_ordering: true  # Uncomment to disable the `directive_ordering` rule
+    prefer_relative_imports: true  # Uncomment to enable the `prefer_relative_imports` rule
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
