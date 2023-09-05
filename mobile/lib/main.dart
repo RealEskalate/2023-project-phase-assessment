@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/features/example/presentation/screens/homepage.dart';
 import 'package:mobile/features/example/presentation/screens/onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
             initialRoute: initialRoute,
             routes: {
               '/': (context) => const Onboarding(),
-              '/home': (context) => const Placeholder(),
+              '/home': (context) => const Homepage(),
               '/detail': (context) => const Placeholder(),
               // Define routes here
             },
