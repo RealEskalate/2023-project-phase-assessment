@@ -1,5 +1,10 @@
+import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
+import '../entities/movie.dart';
+
 abstract class MovieRepository {
-    Future<List<Movie>> getMovies();
-    Future<Movie> getMovie(String id);
-    Future<List<Movie>> searchMovies(String query);
+  Future<Either<Failure, List<Movie>>> getMovies();
+  Future<Either<Failure, Movie>> getMovie(String id);
+  Future<Either<Failure, List<Movie>>> searchMovies(String query);
 }
