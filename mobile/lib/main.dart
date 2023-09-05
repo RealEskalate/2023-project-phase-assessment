@@ -22,8 +22,7 @@ class MyApp extends StatelessWidget {
       home: ScreenUtilInit(
           designSize: Size(390, 844),
           minTextAdapt: true,
-          // child: OnboardingScreen()),
-          child: HomePage()),
+          child: OnboardingScreen()),
     );
   }
 }
