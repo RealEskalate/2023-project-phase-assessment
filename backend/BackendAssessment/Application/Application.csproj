@@ -22,6 +22,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Features\Booking\Command\DeleteBooking\" />
+      <Folder Include="Features\Booking\Command\UpdateBooking\" />
       <Folder Include="Features\Category\Queries\GetCategoryByName\" />
       <Folder Include="Features\Product\Queries\GetProductsByCategory\" />
       <Folder Include="Features\Product\Queries\GetProductsByName\" />

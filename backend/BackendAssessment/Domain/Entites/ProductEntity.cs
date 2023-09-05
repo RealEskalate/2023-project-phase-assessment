@@ -10,4 +10,5 @@ public class ProductEntity : BaseEntity
     public int CategoryId { get; set; }
     public CategoryEntity Category { get; set; } = null!;
     public int AvailableQuantity { get; set; }
+    public ICollection<ProductBooking> ProductBookings { get; set; } = null!;
 }
