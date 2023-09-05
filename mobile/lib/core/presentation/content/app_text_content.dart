@@ -1,5 +1,3 @@
-import '../../../features/onboarding/presentation/screens/onboarding_screen.dart';
-
 abstract final class AppTextContent {
   static const onboardingScreenTitle =
       'Streaming movie and TV. Watch instantly';
