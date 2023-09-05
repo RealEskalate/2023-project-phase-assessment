@@ -1,6 +1,6 @@
 using Application.Common.Dtos;
 
-namespace Application.Features.Category.Dtos;
+namespace Application.Features.Categories.Dtos;
 
 public class CategoryDto : BaseDto
 {
