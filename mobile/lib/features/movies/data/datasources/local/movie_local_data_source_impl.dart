@@ -26,10 +26,9 @@ class MovieLocalDataSourceImpl extends MovieLocalDataSource {
       movies[movieIndex] = movie;
     }
 
-    await _cacheMovies(movies);
+    await _cacheSavedMovies(movies);
   }
 
- 
   @override
   Future<MovieModel> getMovie(String id) async {
     final movies = await getMovies();
@@ -65,12 +64,12 @@ class MovieLocalDataSourceImpl extends MovieLocalDataSource {
 
     final filteredMovies = movies.where((movie) => movie.id != movieId);
 
-    await _cacheMovies(filteredMovies.toList());
+    await _cacheSavedMovies(filteredMovies.toList());
 
     return movies.firstWhere((movie) => movie.id == movieId);
   }
 
-  Future<void> _cacheMovies(List<MovieModel> movies) async {
+  Future<void> _cacheSavedMovies(List<MovieModel> movies) async {
     final jsonEncoded = jsonEncode(movies);
 
     await sharedPreferences.setString(movieKey, jsonEncoded);
