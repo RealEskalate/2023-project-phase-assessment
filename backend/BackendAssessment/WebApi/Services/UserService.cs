@@ -1,7 +1,7 @@
 using System.Security.Claims;
-using SocialSync.WebApi.Services.Interfaces;
+using WebApi.Services.Interfaces;
 
-namespace SocialSync.WebApi.Services;
+namespace WebApi.Services;
 
 public class UserService : IUserService
 {

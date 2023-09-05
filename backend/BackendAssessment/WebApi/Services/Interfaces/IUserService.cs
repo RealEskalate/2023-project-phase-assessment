@@ -1,4 +1,4 @@
-namespace SocialSync.WebApi.Services.Interfaces;
+namespace WebApi.Services.Interfaces;
 
 public interface IUserService
 {
