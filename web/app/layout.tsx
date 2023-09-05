@@ -1,8 +1,15 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+"use client"
+import "./globals.css";
+import type { Metadata } from "next";
+// import { Inter } from "next/font/google";
+import  NavBar  from "@/components/layout/NavBar";
+import SearchBar from "@/components/search/SearchBar";
+import Footer from "@/components/layout/Footer";
+import DoctorsCard from "@/components/doctors/doctorscard";
+import DoctorsList from "@/components/doctors/doctors-list";
+import { Provider } from "@/node_modules/react-redux/es/exports";
+// const inter = Inter({ subsets: ['latin'] })
+import { store } from "@/store/store";
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +22,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+   
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`flex flex-col `}>
+        <header>
+          <Provider store={store}>
+          <NavBar />
+          <DoctorsList/>
+          {/* <SearchBar/> */}
+          <Footer/>
+          </Provider>
+        </header>
+      </body>
     </html>
+  
   )
 }
