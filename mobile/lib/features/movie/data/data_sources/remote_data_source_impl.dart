@@ -23,6 +23,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
         },
       );
       if (response.statusCode == 200) {
+        print("getall");
+
         try {
           final movies = json.decode(response.body)['data'] as List;
           return movies.map((e) => MovieModel.fromJson(e)).toList();
@@ -48,6 +50,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
         },
       );
       if (response.statusCode == 200) {
+        print("movie");
         try {
           final movie = json.decode(response.body)['data'];
           return Future.value(MovieModel.fromJson(movie));

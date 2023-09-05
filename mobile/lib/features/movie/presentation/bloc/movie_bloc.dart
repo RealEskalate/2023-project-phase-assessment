@@ -49,7 +49,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   FutureOr<void> _getAllMoviesEvent(
       GetMoviesEvent event, Emitter<MovieState> emit) async {
-    emit(MovieLoadingState());
+    emit(AllMovieLoadingState());
 
     final result = await getAllMoviesUseCase(NoParams());
     result.fold(
@@ -60,6 +60,8 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   FutureOr<void> _searchMoviesEvent(
       SearchMoviesEvent event, Emitter<MovieState> emit) async {
+    emit(SearchMoviesLoadingState());
+
     final result =
         await searchMoviesUseCase(SearchMoviesParams(queryParams: event.query));
     result.fold(
@@ -70,6 +72,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   FutureOr<void> _getMovieDetailEvent(
       GetMovieDetailEvent event, Emitter<MovieState> emit) async {
+    emit(GetMovieLoadingState());
     final result =
         await getMovieDetailUseCase(GetMovieParams(movieId: event.movieId));
     result.fold(
@@ -92,23 +95,24 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       RemoveFromBookmarkMovieEvent event, Emitter<MovieState> emit) async {
     final result = await removeFromBookmarkMovieUseCase(
         BookmarkMovieParam(movieEntity: event.movieEntity));
-    
-        result.fold(
+
+    result.fold(
         (failure) =>
             emit(MovieErrorState(message: _mapFailureToMessage(failure))),
         (r) => emit(const SucessState(message: "book mark removed")));
-      
   }
 
   FutureOr<void> _getBookmarkedMoviesEvent(
-      GetBookmarkedMoviesEvent event, Emitter<MovieState> emit)async {
-        final result = await getBookmarkedMoviesUseCase(NoParams());
-    
-        result.fold(
+      GetBookmarkedMoviesEvent event, Emitter<MovieState> emit) async {
+    emit(SavedMovieLoadingState());
+    final result = await getBookmarkedMoviesUseCase(NoParams());
+
+    result.fold(
         (failure) =>
             emit(MovieErrorState(message: _mapFailureToMessage(failure))),
-        (book_mark_movie) => emit(MovieBookmarkedLoadedState(movies: book_mark_movie)));
-      }
+        (book_mark_movie) =>
+            emit(MovieBookmarkedLoadedState(movies: book_mark_movie)));
+  }
 }
 
 String _mapFailureToMessage(Failure failure) {

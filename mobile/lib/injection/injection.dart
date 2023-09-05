@@ -25,14 +25,14 @@ Future<void> init() async {
       removeFromBookmarkMovieUseCase: sl(),
       getBookmarkedMoviesUseCase: sl()));
 
-  sl.registerSingleton(() => GetAllMoviesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetAllMoviesUseCase(repository: sl()));
 
-  sl.registerSingleton(() => GetMovieDetailUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetMovieDetailUseCase(repository: sl()));
 
-  sl.registerSingleton(() => SearchMoviesUseCase(repository: sl()));
-  sl.registerSingleton(() => BookmarkMovieUseCase(repository: sl()));
-  sl.registerSingleton(() => RemoveFromBookmarkMovieUseCase(repository: sl()));
-  sl.registerSingleton(() => GetBookmarkedMoviesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => SearchMoviesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => BookmarkMovieUseCase(repository: sl()));
+  sl.registerLazySingleton(() => RemoveFromBookmarkMovieUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetBookmarkedMoviesUseCase(repository: sl()));
 
   sl.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(
       remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));

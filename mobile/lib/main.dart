@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/features/movie/presentation/bloc/movie_bloc.dart';
-import 'package:mobile/injection/injection.dart';
+
 
 import 'features/movie/presentation/screens/OnboardingPage.dart';
 import 'features/movie/presentation/screens/home_page.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<MovieBloc>(),
+      create: (context) => di.sl<MovieBloc>(),
       child: MaterialApp(
         routes: {
           '/': (context) => OnBoardingPage(),

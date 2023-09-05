@@ -27,6 +27,7 @@ class MovieRepositoryImpl implements MovieRepository {
       try {
         final remoteMovies = await remoteDataSource.getAllMovies();
         localDataSource.cacheMovies(remoteMovies);
+        print("repo");
         return Right(remoteMovies);
       } on ServerException {
         return Left(ServerFailure(message: "Server Failure"));

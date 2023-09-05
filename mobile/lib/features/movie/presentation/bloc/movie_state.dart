@@ -9,8 +9,11 @@ sealed class MovieState extends Equatable {
 
 final class MovieInitialState extends MovieState {}
 
-final class MovieLoadingState extends MovieState {}
+final class SavedMovieLoadingState extends MovieState {}
 
+final class AllMovieLoadingState extends MovieState {}
+final class SearchMoviesLoadingState extends MovieState {}
+final class GetMovieLoadingState extends MovieState {}
 final class MoviesLoadedState extends MovieState {
   final List<MovieEntity> movies;
 
