@@ -26,4 +26,3 @@ class NetworkException extends Equatable implements Exception {
   @override
   List<Object> get props => [message];
 }
-
