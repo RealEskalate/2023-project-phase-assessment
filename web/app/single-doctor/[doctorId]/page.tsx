@@ -19,12 +19,13 @@ const doctor = {
 
 interface props {
   params: {
-    id: string;
+    doctorId: string;
   }
 }
 
 const SingleDoctorPage: React.FC<props> = ( { params }) => {
-  const { data, isLoading, isError } = useGetSingleDoctorQuery(params.id);
+  console.log('>>', params)
+  const { data, isLoading, isError } = useGetSingleDoctorQuery(params.doctorId);
 
   if (isLoading) {
     return <div>Loading...</div>;
