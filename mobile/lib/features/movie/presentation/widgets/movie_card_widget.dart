@@ -18,14 +18,14 @@ class MovieCardWidget extends StatelessWidget {
           children: [
             // Image
             Container(
-              width: 100.0,
+              width: 100.w,
               height: double.infinity, // Take full height of the card
               child: Image.asset(
                 'assets/images/image.jpeg', // Replace with your image asset
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(width: 16.0), // Spacing between image and text
+            SizedBox(width: 16.w), // Spacing between image and text
 
             // Text and Info
             Expanded(
@@ -43,11 +43,11 @@ class MovieCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Icons.star, color: Colors.yellow),
-                      SizedBox(width: 4.0),
+                      SizedBox(width: 4.w),
                       Text('4.5'),
-                      SizedBox(width: 16.0),
+                      SizedBox(width: 16.w),
                       Icon(Icons.access_time),
-                      SizedBox(width: 4.0),
+                      SizedBox(width: 4.w),
                       Text('2h 30m'),
                     ],
                   ),

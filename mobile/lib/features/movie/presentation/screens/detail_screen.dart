@@ -47,7 +47,7 @@ class DetailScreen extends StatelessWidget {
                               Icons.star,
                               color: Colors.white,
                             ),
-                            SizedBox(width: 8.0),
+                            SizedBox(width: 8.w),
                             Text(
                               "4.5",
                               style: TextStyle(
@@ -61,7 +61,7 @@ class DetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 16.h),
               Text(
                 "A man Called Otto",
                 style: TextStyle(
@@ -88,7 +88,7 @@ class DetailScreen extends StatelessWidget {
                 "Otto (Tom Hanks) is a man who is easily angered after losing his wife. The situation has changed when the family moved to proximity.",
                 style: TextStyle(fontSize: 16.0),
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 16.h),
               ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
 

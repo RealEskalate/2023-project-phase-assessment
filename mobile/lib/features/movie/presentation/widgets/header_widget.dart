@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderWidget extends StatelessWidget {
   final VoidCallback onBackTap;
@@ -25,7 +26,7 @@ class HeaderWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-              width: 16.0), // Add some spacing between the back arrow and text
+              width: 16.w), // Add some spacing between the back arrow and text
 
           // "Alem Cinema" Text
           Text(

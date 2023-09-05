@@ -76,11 +76,5 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     );
   }
 
-  void _filterArticles(BuildContext context) {
-    if (queryController.text.isNotEmpty) {
-      //   BlocProvider.of<ArticleBloc>(context).add(FilterArticles(query: queryController.text));
-    } else {
-      //   BlocProvider.of<ArticleBloc>(context).add(const LoadArticles());
-    }
-  }
+  
 }

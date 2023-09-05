@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 15,
                 ),
                 SearchBarWidget(searchByName: searchByName),
-                SizedBox(height: 15),
+                SizedBox(height: 15.h),
                 // BookMarkCard(),
                 Expanded(
                   child: ListView(
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16.0),
