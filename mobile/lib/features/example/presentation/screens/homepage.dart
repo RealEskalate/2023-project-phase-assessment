@@ -6,10 +6,14 @@ import 'package:mobile/features/example/data/models/film_models.dart';
 import 'package:mobile/features/example/domain/usecases/getmovies.dart';
 import 'package:mobile/features/example/presentation/bloc/movie_bloc.dart';
 import 'package:mobile/features/example/presentation/bloc/movie_event.dart';
+import 'package:mobile/features/example/presentation/bloc/movie_state.dart';
 import 'package:mobile/features/example/presentation/widgets/header.dart';
 import 'package:mobile/features/example/presentation/widgets/horizontalList.dart';
 import 'package:mobile/features/example/presentation/widgets/search_result.dart';
 import 'package:mobile/features/example/presentation/widgets/tips_card.dart';
+// import flutter bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 //import
 
 List<Movie> sampleMovies = [
@@ -63,11 +67,32 @@ class _HomepageState extends State<Homepage> {
       fetchMoviesUseCase: FetchMoviesUseCase(
           dataSource: UserApiDataSource(baseUrl: 'YOUR_BASE_URL')));
 
-  @override
-  void initState() {
-    super.initState();
-    movieBloc.add(FetchMoviesEvent());
-  }
+  // bool _isDisposed = false;
+  // var object = <Movie>[];
+
+  // @override
+  // void dispose() {
+  //   _isDisposed = true;
+  //   super.dispose();
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   // Articles
+  //   context.read<MovieBloc>().add(FetchMoviesEvent());
+  //   context.read<MovieBloc>().stream.listen((state) {
+  //     if (!_isDisposed) {
+  //       if (state is MoviesLoaded) {
+  //         // log("Articles are fetched on User Profile Page");
+  //         setState(() {
+  //           object = state.movies;
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 
   List<String> tags = ["Movies", "Series", "Kids", "Documentaries"];
 
