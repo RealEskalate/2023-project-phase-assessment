@@ -7,7 +7,7 @@ class Movie extends Equatable {
   final String description;
   final String duration;
   final String image;
-  final int rating;
+  final double rating;
 
   const Movie({
     required this.id,

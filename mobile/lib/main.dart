@@ -8,7 +8,7 @@ Future<void> main() async {
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,10 @@ class App extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(home: Onboarding()),
+      child: MaterialApp(
+        home: Onboarding(), // Set your home screen here
+        debugShowCheckedModeBanner: false, // Remove the debug banner
+      ),
     );
   }
 }

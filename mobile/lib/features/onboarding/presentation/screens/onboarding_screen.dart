@@ -1,47 +1,56 @@
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatelessWidget {
-  const Onboarding({super.key});
+  const Onboarding({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(children: [
-        MoviePosterSlider(),
-        Container(
-          child: Row(
-            children: [
-              Text(
-                "Streaming Movie and TV. Watch Instantly",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                ),
-                maxLines: 3,
-              ),
-              Text(
-                "Enjoy all your favourite films and TV shows on your streaming devices",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w200,
-                ),
-                maxLines: 2,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "Get Started",
+      color: Colors.white,
+      child: Column(
+        children: [
+          MoviePosterSlider(),
+          SizedBox(height: 20),
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Streaming Movie and TV. Watch Instantly",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Enjoy all your favorite films and TV shows on your streaming devices",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w200,
+                  ),
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        )
-      ]),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -80,8 +89,9 @@ class _MoviePosterSliderState extends State<MoviePosterSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
+    return Container(
+      height: 300, // Adjust the height as needed
+      child: Stack(
         children: [
           PageView.builder(
             controller: _pageController,
@@ -146,6 +156,7 @@ class MoviePoster extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 20),
           Text(
@@ -154,6 +165,7 @@ class MoviePoster extends StatelessWidget {
               fontSize: 18,
               color: Colors.white,
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
