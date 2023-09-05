@@ -33,74 +33,72 @@ class _HomePageState extends State<HomePage> {
           )),
       backgroundColor: Colors.grey.shade100,
       body: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-        return Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: AppDimension.width(10, context),
-              vertical: AppDimension.height(10, context)),
-          child: Center(
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Column(children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: AppDimension.height(20, context),
-                        horizontal: AppDimension.width(15, context)),
-                    child: Container(
-                      height: AppDimension.height(70, context),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: AppDimension.width(10, context)),
-                              child: TextField(
-                                onSubmitted: (value) {
-                                  BlocProvider.of<HomeBloc>(context)
-                                      .add(SearchMovies(term: value));
-                                },
-                                controller: searchController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Looking for shows',
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none,
-                                ),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: AppDimension.height(20, context),
-                                ),
-                              ),
-                            ),
+        return Container(
+          child: Column(children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                  vertical: AppDimension.height(25, context),
+                  horizontal: AppDimension.width(15, context)),
+              child: Container(
+                height: AppDimension.height(55, context),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: AppDimension.width(10, context)),
+                        child: TextField(
+                          onSubmitted: (value) {
+                            BlocProvider.of<HomeBloc>(context)
+                                .add(SearchMovies(term: value));
+                          },
+                          controller: searchController,
+                          decoration: const InputDecoration(
+                            hintText: 'Looking for shows',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: InputBorder.none,
                           ),
-                          Container(
-                            height: double.infinity,
-                            width: AppDimension.width(60, context),
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(
-                                    AppDimension.height(10, context))),
-                            child: IconButton(
-                              icon:
-                                  const Icon(Icons.search, color: Colors.white),
-                              onPressed: () {
-                                BlocProvider.of<HomeBloc>(context).add(
-                                    SearchMovies(term: searchController.text));
-                              },
-                            ),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: AppDimension.height(20, context),
                           ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                  getStatus(state: state)
-                ])
-              ],
+                    Container(
+                      height: double.infinity,
+                      width: AppDimension.width(55, context),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 30, 137, 255),
+                          borderRadius: BorderRadius.circular(
+                              AppDimension.height(10, context))),
+                      child: IconButton(
+                        icon: const Icon(Icons.search, color: Colors.white),
+                        onPressed: () {
+                          BlocProvider.of<HomeBloc>(context)
+                              .add(SearchMovies(term: searchController.text));
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              margin: EdgeInsets.only(bottom: 20),
+              child: Text(
+                "All Movies",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+              ),
+            ),
+            getStatus(state: state)
+          ]),
         );
       }),
     );
@@ -121,8 +119,8 @@ class _HomePageState extends State<HomePage> {
               style: const TextStyle(fontSize: 18),
             ));
       }
-      return Container(
-        height: AppDimension.height(480, context),
+      return Expanded(
+        // height: doube,
         child: ListView.builder(
           itemCount: state.movies.length,
           itemBuilder: (context, index) {
