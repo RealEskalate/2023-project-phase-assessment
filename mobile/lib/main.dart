@@ -17,7 +17,9 @@ class App extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        home: Onboarding(), // Set your home screen here
+        home: Scaffold(
+          body: Onboarding(),
+        ), // Set your home screen here
         debugShowCheckedModeBanner: false, // Remove the debug banner
       ),
     );
