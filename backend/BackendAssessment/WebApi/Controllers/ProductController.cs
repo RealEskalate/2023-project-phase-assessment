@@ -3,6 +3,7 @@ using Application.DTO.Product.DTO;
 using Application.Features.ProductsFeature.Requests.Commands;
 using Application.Features.ProductsFeature.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -37,6 +38,7 @@ namespace WebApi.Controllers
 
         // update
         [HttpPut("{id}")]
+        [Authorize("Administrator")]
         public async Task<ActionResult<BaseResponse<ProductResponseDTO>>> Put(int id, [FromBody] ProductUpdateDTO product)
         {
             var result = await _mediator.Send(new UpdateProductCommand { ProductData = product });
@@ -55,12 +57,22 @@ namespace WebApi.Controllers
 
         
         [HttpPost("create")]
+        [Authorize("Administrator")]
         public async Task<ActionResult<BaseResponse<ProductResponseDTO>>> Post([FromBody] ProductCreateDTO product)
         {
             var result = await _mediator.Send(new CreateProductCommand { ProductData = product });
             return Ok(result);
         }
 
-        
+
+        // delete
+        [HttpDelete("{id}")]
+        [Authorize("Administrator")]
+        public async Task<ActionResult<BaseResponse<string>>> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteProductCommand { Id = id });
+            return Ok(result);
+        }
+
     }
 }

@@ -15,13 +15,13 @@ namespace Application.DTO.Product.Validations
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .WithMessage("Name is required")
-                .MaximumLength(5)
+                .MaximumLength(100)
                 .WithMessage("Name can't be longer than 50 characters");
 
             RuleFor(x => x.Description)
                 .NotEmpty()
                 .WithMessage("Description is required")
-                .MaximumLength(5)
+                .MaximumLength(500)
                 .WithMessage("Description can't be longer than 200 characters");
 
             RuleFor(x => x.Price)

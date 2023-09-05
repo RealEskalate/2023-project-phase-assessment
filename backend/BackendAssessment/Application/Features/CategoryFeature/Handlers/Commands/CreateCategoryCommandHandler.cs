@@ -37,12 +37,12 @@ namespace Application.Features.CategoryFeature.Handlers.Commands
             }
 
 
-            var categoryExist = await _unitOfWork.CategoryRepository.CategoryExist(request.CategoryData.Name);
+            //var categoryExist = await _unitOfWork.CategoryRepository.CategoryExist(request.CategoryData.Name);
 
-            if (categoryExist)
-            {
-                throw new BadRequestException("Category Already Exist, no need to create it again");
-            }
+            //if (categoryExist == true)
+            //{
+            //    throw new BadRequestException("Category Already Exist, no need to create it again");
+            //}
 
 
             var newCategory = _mapper.Map<Category>(request.CategoryData);

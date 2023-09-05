@@ -49,5 +49,12 @@ namespace Persistence.Repositories
             _dbContext.Entry(entity).State = EntityState.Modified;
             return entity;
         }
+
+        public async Task<int> Delete(int id)
+        {
+            var entity = await _dbContext.Set<T>().FindAsync(id);
+            _dbContext.Set<T>().Remove(entity);
+            return id;
+        }
     }
 }

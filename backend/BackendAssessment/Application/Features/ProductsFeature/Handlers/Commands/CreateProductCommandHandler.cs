@@ -40,8 +40,6 @@ namespace Application.Features.ProductsFeature.Handlers.Commands
             var newProduct = _mapper.Map<Product>(request.ProductData);
 
 
-            Console.WriteLine("the new product is :", newProduct);
-
 
             await _unitOfWork.ProductRepository.Add(newProduct);
             await _unitOfWork.Save();

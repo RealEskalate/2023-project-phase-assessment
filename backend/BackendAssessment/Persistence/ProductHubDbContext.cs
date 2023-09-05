@@ -25,13 +25,6 @@ namespace Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductHubDbContext).Assembly);
-
-
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-
-            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
         }
     }
 }

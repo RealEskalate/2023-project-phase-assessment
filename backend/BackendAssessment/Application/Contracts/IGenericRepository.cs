@@ -17,5 +17,7 @@ namespace Application.Contracts
         public Task<List<T>> GetAll();
 
         public Task<bool> Exists(int id);
+
+        public Task<int> Delete(int id);
     }
 }

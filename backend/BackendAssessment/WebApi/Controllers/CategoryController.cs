@@ -3,6 +3,7 @@ using Application.DTO.Category.DTO;
 using Application.Features.CategoryFeature.Requests.Commands;
 using Application.Features.CategoryFeature.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -33,7 +34,9 @@ namespace WebApi.Controllers
 
             return Ok(result);
         }
+        
         [HttpPost]
+        [Authorize("Administrator")]
         public  async Task<ActionResult<BaseResponse<CategoryResponseDTO>>> Post([FromBody] CategoryCreateDTO category)
         {
             var result = await _mediator.Send(new CreateCategoryCommand() { CategoryData = category });
@@ -41,7 +44,9 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+
         [HttpPut("{id}")]
+        [Authorize("Administrator")]
         public async Task<ActionResult<BaseResponse<CategoryResponseDTO>>> Put(int id, [FromBody] CategoryUpdateDTO category)
         {
             var result = await _mediator.Send(new UpdateCategoryCommand() { CategoryData = category });
@@ -49,6 +54,16 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-       
+
+        // delete
+        [HttpDelete("{id}")]
+        [Authorize("Administrator")]
+        public async Task<ActionResult<BaseResponse<string>>> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteCategoryCommand() { Id = id });
+
+            return Ok(result);
+        }
+
     }
 }
