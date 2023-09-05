@@ -7,7 +7,7 @@ abstract class LocalDataSource {
   Future<void> cacheMovie(MovieModel movie);
   Future<void> cacheMovies(List<MovieModel> movies);
 
-  Future<void> getCachedBookMarkedMovies();
+  Future<List<MovieModel>> getCachedBookMarkedMovies();
   Future<void> cacheBookMarkedMovie(MovieModel movie);
   Future<MovieModel> removeBookMarkedMovie(MovieModel movie);
   Future<void> cacheBookMarkedMovies(List<MovieModel> movie);
