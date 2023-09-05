@@ -76,4 +76,10 @@ public class ProductRepository : IProductRepository
         var products = await query.ToListAsync();
         return _mapper.Map<IEnumerable<ProductDTO>>(products);
     }
+
+
+    public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
+    {
+        return await _context.Categories.ToListAsync();
+    }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs.ProductDTOs;
+using Domain.Entities;
 
 namespace Application.Contracts.Persistence
 {
@@ -15,5 +16,9 @@ namespace Application.Contracts.Persistence
         Task<ProductDTO> UpdateProductAsync(int productId, ProductUpdateDTO updateProductDto);
         Task<bool> DeleteProductAsync(int productId);
         Task<IEnumerable<ProductDTO>> SearchProductsAsync(ProductSearchDTO searchDto);
+
+        Task<IEnumerable<Category>> GetAllCategoriesAsync();
+
+
     }
 }
