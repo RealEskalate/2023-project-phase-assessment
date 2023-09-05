@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/presentation/router/routes.dart';
 import '../../../../core/presentation/theme/app_colors.dart';
 import '../../../../core/presentation/theme/app_theme.dart';
 
@@ -48,7 +50,9 @@ class OnboardingContent extends StatelessWidget {
               height: 50.h,
               width: 360.w,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(Routes.movies);
+                },
                 child: const Text('Get Started'),
               ),
             )
