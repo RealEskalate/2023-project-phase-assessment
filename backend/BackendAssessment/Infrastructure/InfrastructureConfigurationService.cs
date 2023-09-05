@@ -24,7 +24,7 @@ namespace Persistence
             ); 
  
             services.AddIdentity<ApplicaionUser, IdentityRole>().AddEntityFrameworkStores<AuthIdentityDbContext>().AddDefaultTokenProviders();
-            services.AddIdentity<ApplicationRole, IdentityRole>().AddEntityFrameworkStores<AuthIdentityDbContext>().AddDefaultTokenProviders(); 
+            services.AddIdentity<ApplicationRole, IdentityUser>().AddEntityFrameworkStores<AuthIdentityDbContext>().AddDefaultTokenProviders(); 
 
 
             services.AddTransient<IAuthService, AuthService>(); 
