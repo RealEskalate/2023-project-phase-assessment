@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_colors.dart';
+
+class AppDimensions {
+  static const width = 411.4;
+  static const height = 866.3;
+}
 
 abstract class AppTheme {
   /// Theme data for the app
@@ -23,15 +29,15 @@ abstract class AppTheme {
     ),
 
     // Text Theme
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       // Headings
-      titleMedium: TextStyle(
+      titleMedium: const TextStyle(
         color: AppColors.darkerBlue,
         fontFamily: 'Poppins',
         fontSize: 24,
         fontWeight: FontWeight.w500,
       ),
-      titleLarge: TextStyle(
+      titleLarge: const TextStyle(
         fontFamily: 'Poppins',
         color: AppColors.darkerBlue,
         fontSize: 24,
@@ -39,17 +45,32 @@ abstract class AppTheme {
       ),
 
       // Body
-      bodySmall: TextStyle(
+      bodySmall: const TextStyle(
         color: AppColors.darkBlue,
         fontFamily: 'Poppins',
         fontSize: 14,
         fontWeight: FontWeight.w500,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: const TextStyle(
         fontFamily: 'Poppins',
         color: AppColors.darkBlue,
         fontSize: 16,
         fontWeight: FontWeight.w400,
+      ),
+      bodyLarge: const TextStyle(
+        fontFamily: 'Poppins',
+        color: AppColors.darkBlue,
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+      ),
+
+      displayLarge: TextStyle(
+        fontFamily: 'Poppins',
+        color: AppColors.darkerBlue,
+        fontSize: 40,
+        wordSpacing: 6.sp,
+        letterSpacing: 1.sp,
+        fontWeight: FontWeight.w600,
       ),
     ),
 
