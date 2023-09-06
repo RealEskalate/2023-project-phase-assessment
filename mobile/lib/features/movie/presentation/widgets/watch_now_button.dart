@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class WatchNowButton extends StatelessWidget {
   const WatchNowButton({
@@ -8,7 +9,7 @@ class WatchNowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {context.push('/home');},
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromARGB(255, 27, 149, 249),
         minimumSize: const Size(350, 50),

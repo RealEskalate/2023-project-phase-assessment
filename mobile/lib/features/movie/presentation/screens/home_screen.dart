@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
          leading: IconButton(
           onPressed: () {
-            context.push('/home');
+            context.pop();
           },
           icon: Icon(
             Icons.arrow_back,

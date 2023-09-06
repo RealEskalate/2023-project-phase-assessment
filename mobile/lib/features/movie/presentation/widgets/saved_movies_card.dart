@@ -36,6 +36,13 @@ class SavedMoviesCard extends StatelessWidget {
                 Container(
                   height: 250,
                   width: 200,
+                  // child: ClipRRect(
+                  //     borderRadius: BorderRadius.circular(12),
+                  //     child: FadeInImage.assetNetwork(
+                  //       placeholder: 'assets/images/loading.jpg',
+                  //       image: savedMovies[index].image,
+                  //       fit: BoxFit.cover,
+                  //     )),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(

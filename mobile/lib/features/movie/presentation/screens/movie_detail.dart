@@ -41,7 +41,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            context.push('/home');
+            context.pop();
           },
           icon: Icon(
             Icons.arrow_back,
@@ -74,9 +74,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           builder: (context, state) {
             if (state is MovieInitial) {
               BlocProvider.of<MovieBloc>(context).add(GetMovieEvent(id: widget.id));
-              return LoadingWidget(message: "Loading");
+              return Center(child: Expanded(child: LoadingWidget(message: "Loading")));
             } else if (state is LoadingMovies) {
-              return LoadingWidget(message: "Loading");
+              return Center(child: Expanded(child: LoadingWidget(message: "Loading")));
             } else if (state is MovieLoaded) {
               return SingleChildScrollView(
                 child: SafeArea(

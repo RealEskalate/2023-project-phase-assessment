@@ -32,6 +32,8 @@ class AllMoviesTile extends StatelessWidget {
                 Container(
                   height: 80,
                   width: 120,
+                  // child: FadeInImage.assetNetwork(placeholder: 'assets/images/loading.jpg', image: allMovies[index].image, fit: BoxFit.cover,) ,
+
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(allMovies[index].image),
