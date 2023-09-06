@@ -19,8 +19,10 @@ const DoctorPage: React.FC = ({
         <div className='relative w-ful h-3/4 bg-gray-300'>
           {/* image */}
         </div>
+        <div className='w-full flex h-[230px] justify-center items-center'>
+        </div>
         <div className='relative items-end justify-center z-10 w-[230px] h-[230px] rounded-[115px] border-primary border-3'>
-          <Image src={doctor?.photo} alt='profile image' className='absolute' objectFit='cover' fill={true} />
+          <Image src={doctor?.photo} alt='profile image' className='absolute rounded-full' objectFit='cover' fill={true} />
         </div>
       </div>
       <div className='flex flex-col w-3/5 justify-start'>
