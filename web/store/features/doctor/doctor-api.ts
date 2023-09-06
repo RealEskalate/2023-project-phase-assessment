@@ -18,7 +18,13 @@ export const doctorsApi = createApi({
         method: 'GET',
       }),
     }),
+    searchDoctors: builder.query({
+      query: (keyword) => ({
+        url: `/search?keyword=${keyword}&institutions=false&articles=false`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-export const { useGetDoctorsQuery, useGetSingleDoctorQuery } = doctorsApi;
+export const { useGetDoctorsQuery, useGetSingleDoctorQuery, useSearchDoctorsQuery } = doctorsApi;
