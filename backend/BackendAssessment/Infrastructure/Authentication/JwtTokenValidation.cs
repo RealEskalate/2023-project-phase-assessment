@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Application.Common.Interface.Authentication;
+using Infrastructure.Authentication;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Application.Persistence.Contracts;
 
 namespace Infrastructure.Authentication
 {
@@ -19,7 +16,25 @@ namespace Infrastructure.Authentication
             _jwtSettings = jwtOptions.Value;
         }
 
-        public Guid ExtractUserIdFromToken(string token)
+        public string ExtractEmailFromToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            Console.WriteLine(jwtToken);
+
+            // Find the claim with the user ID
+            var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "sub");
+
+            if (emailClaim != null)
+            {
+                return emailClaim.Value;
+            }
+
+            // Return null if the user ID claim is not found
+            return null;
+        }
+
+        public int ExtractUserIdFromToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtToken = tokenHandler.ReadJwtToken(token);
@@ -30,11 +45,11 @@ namespace Infrastructure.Authentication
 
             if (userIdClaim != null)
             {
-                return Guid.Parse(userIdClaim.Value);
+                return int.Parse(userIdClaim.Value);
             }
 
             // Return null if the user ID claim is not found
-            return Guid.Empty;
+            return 0;
         }
 
         public bool ValidateToken(string token)

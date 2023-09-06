@@ -1,87 +1,117 @@
-﻿using Application.Dtos.Product;
-using Application.Features.Products.Request.Commands;
+using System.Security.Claims;
+using Application.DTOs.Products;
+using Application.Features.Products.Request.Command;
 using Application.Features.Products.Request.Queries;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : ApiController
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMediator _mediator;
-
-        private readonly IHttpContextAccessor _contextAccessor;
-
-        public ProductController(IMediator mediator, IHttpContextAccessor contextAccessor)
+        private readonly IMapper _mapper;
+        public ProductController(IMediator mediator, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
-            _contextAccessor = contextAccessor;
+            _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
-        // GET: api/<ProductControlle>
+        
+
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> Get()
+        public async Task<ActionResult<List<ProductResponseDto>>> GetProducts()
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var products = await _mediator.Send(new GetAllProductsRequest { UserId = new Guid(Id)});
-            return Ok(products);
-            
+            var userIdtoClaim = _httpContextAccessor.HttpContext!.User.FindFirstValue("uid");
+
+            if (userIdtoClaim != null)
+            {
+                var userId = int.Parse(userIdtoClaim);
+                var products = await _mediator.Send(new GetAllProductRequest() { UserId = userId });
+                return Ok(products);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        // GET api/<ProductController>/5
-        [HttpGet("{id:Guid}")]
-        public async Task<ActionResult<ProductDto>> GetAProduct(Guid id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductResponseDto>> GetProductById(int id)
         {
-            var product = await _mediator.Send(new GetProductDetailsRequest { Id = id });
+            var product = await _mediator.Send(new GetProductRequest() { Id = id });
             return Ok(product);
         }
 
-        // POST api/<ProductController>
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateProductDto createProductDto)
+        [HttpPost("{category_id}")]
+        public async Task<ActionResult<ProductResponseDto>> CreateProduct(int id, CreateProductRequest request)
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            createProductDto.UserId = new Guid(Id);
+            var userIdtoClaim = _httpContextAccessor.HttpContext!.User.FindFirstValue("uid");
 
-            var command = new CreateProductCommand { CreateProductDto = createProductDto };
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            if (userIdtoClaim != null)
+            {
+                var userId = int.Parse(userIdtoClaim);
+                var product = await _mediator.Send(new CreateProductRequest() { 
+                    UserId = userId,
+                    CategoryId = id, 
+                    ProductDetailDto = new ProductDetailDto() { 
+                        Name = request.ProductDetailDto.Name, 
+                        Description = request.ProductDetailDto.Description, 
+                        Price = request.ProductDetailDto.Price 
+                    }
+                });
+
+                return Ok(product);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateProduct([FromBody] UpdateProductDto updateProductDto)
+        public async Task<ActionResult<ProductResponseDto>> UpdateProduct(int id, UpdateProductRequest request)
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var product = await _mediator.Send(new GetProductDetailsRequest { Id = updateProductDto.Id });
-            if (product.UserId != new Guid(Id))
+            var userIdClaim = _httpContextAccessor.HttpContext!.User.FindFirstValue("uid");
+
+            if (userIdClaim != null)
             {
-                throw new Exception("you dont own the current product");
+                var userId = int.Parse(userIdClaim);
+                var product = await _mediator.Send(new UpdateProductRequest() { 
+                    UserId = userId,
+                    ProductId = id, 
+                    ProductDetailDto = new ProductDetailDto() { 
+                        Name = request.ProductDetailDto.Name, 
+                        Description = request.ProductDetailDto.Description, 
+                        Price = request.ProductDetailDto.Price 
+                    }
+                });
+                return Ok(product);
             }
-            var command = new UpdateProductCommand {  UpdateProductDto = updateProductDto };
-            await _mediator.Send(command);
-            return NoContent();
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteProduct(Guid id)
+        async Task<ActionResult> DeleteProduct(int id)
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var product = await _mediator.Send(new GetProductDetailsRequest { Id = id });
-            if (product.UserId != new Guid(Id))
+            var userIdClaim = _httpContextAccessor.HttpContext!.User.FindFirstValue("uid");
+
+            if (userIdClaim != null)
             {
-                throw new Exception("you dont own the current product");
+                var userId = int.Parse(userIdClaim);
+                var product = await _mediator.Send(new DeleteProductRequest() { UserId = userId, ProductId = id });
+                return Ok(product);
             }
-            var command = new DeleteProductRequest { Id = id };
-            await _mediator.Send(command);
-            return NoContent();
-
-
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

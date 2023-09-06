@@ -1,91 +1,102 @@
-﻿using Application.Contracts.persistence;
-using Application.Dtos.Category;
-using Application.Dtos.Product;
-using Application.Features.Products.Request.Commands;
-using Application.Features.Products.Request.Queries;
+using System.Security.Claims;
+using Application.DTOs.Catergories;
+using Application.Features.Categories.Request.Command;
+using Application.Features.Categories.Request.Queries;
+using AutoMapper;
+using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoryController : ApiController
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMediator _mediator;
-        private readonly IUserRepository _userRepository;
-
-        private readonly IHttpContextAccessor _contextAccessor;
-
-        public CategoryController(IMediator mediator, IHttpContextAccessor contextAccessor, IUserRepository userRepository)
+        private readonly IMapper _mapper;
+        public CategoryController(IMediator mediator, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
-            _contextAccessor = contextAccessor;
-            _userRepository = userRepository;
+            _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
-        // GET: api/<CategoryController>
+
+
         [HttpGet]
-        public async Task<ActionResult<List<CategoryDto>>> GetAll()
+        public async Task<ActionResult<List<CategoryResponseDto>>> GetCategories()
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var Categories = await _mediator.Send(new GetAllCategoriesRequest { UserId = new Guid(Id) });
-            return Ok(Categories);
+            var categories = await _mediator.Send(new GetAllCategoriesRequest());
+            return Ok(categories);
         }
 
-        // GET api/<CategoryController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDto>> GetACategory(int id)
+        public async Task<ActionResult<CategoryResponseDto>> GetCategoryById(int id)
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var category = await _mediator.Send(new GetCategoryDetailsRequest { Id = new Guid(Id) });
-            return Ok(category);
+            var idtoClaim = _httpContextAccessor.HttpContext!.User.FindFirstValue("uid");
+
+            if (idtoClaim != null)
+            {
+                var userId = int.Parse(idtoClaim);
+                var category = await _mediator.Send(new GetCategoryRequest() { UserId = userId, CategoryId = id });
+                return Ok(category);
+            }
+            else
+            {
+                return BadRequest("User not found");
+            }
         }
 
-        // POST api/<CategoryController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateCategoryDto createCategoryDto)
+        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto request)
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var user = await _userRepository.GetById(new Guid(Id));
-            if (!user.IsAdmin) {
-                throw new Exception("not an admin");
+            var idtoClaim = _httpContextAccessor.HttpContext!.User.FindFirstValue("uid");
+
+            if (idtoClaim != null)
+            {
+                var Command = new CreateCategoryCommand() { 
+                    UserId = int.Parse(idtoClaim),
+                    CreateCategoryDto = new CreateCategoryDto() { 
+                        Name = request.Name, 
+                        Description = request.Description 
+                    }
+                };
+                
+                ErrorOr<CategoryResponseDto> category = await _mediator.Send(Command);
+                return category.Match<IActionResult>(
+                    category => Ok(category),
+                    errors => Problem(errors)
+                );
             }
-            var command = new CreateCategoryCommand { CreateCategoryDto = createCategoryDto};
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            else
+            {
+                return Unauthorized();
+            }
         }
 
-        // PUT api/<CategoryController>/5
+
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateCategory(int id, [FromBody] UpdateCategoryDto updateCategoryDto)
+        public async Task<ActionResult<CategoryResponseDto>> UpdateCategory(int id, UpdateCategoryRequest request)
         {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var user = await _userRepository.GetById(new Guid(Id));
-            if (!user.IsAdmin)
-            {
-                throw new Exception("not an admin");
-            }
-            var command = new UpdateCategoryCommand {UpdateCategoryDto = updateCategoryDto};
-            await _mediator.Send(command);
-            return NoContent();
-        }
+            var idtoClaim = _httpContextAccessor.HttpContext!.User.FindFirstValue("uid");
 
-        // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteCategory(Guid id)
-        {
-            var Id = _contextAccessor.HttpContext!.User.FindFirstValue("uid");
-            var user = await _userRepository.GetById(new Guid(Id));
-            if (!user.IsAdmin)
+            if (idtoClaim != null)
             {
-                throw new Exception("not an admin");
+                var userId = int.Parse(idtoClaim);
+                var category = await _mediator.Send(new UpdateCategoryRequest() { 
+                    UserId = userId,
+                    CategoryId = id,
+                    CreateCategoryDto = new CreateCategoryDto() { 
+                        Name = request.CreateCategoryDto.Name, 
+                        Description = request.CreateCategoryDto.Description 
+                    }
+                });
+                return Ok(category);
             }
-            var command = new DeleteCategoryRequest { Id = id };
-            await _mediator.Send(command);
-            return NoContent();
-        }
+            else
+            {
+                return BadRequest("User not found");
+            }
+        }  
     }
 }

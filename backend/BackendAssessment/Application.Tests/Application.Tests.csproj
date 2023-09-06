@@ -24,8 +24,4 @@
         <PackageReference Include="Shouldly" Version="4.2.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\Products\" />
-    </ItemGroup>
-
 </Project>

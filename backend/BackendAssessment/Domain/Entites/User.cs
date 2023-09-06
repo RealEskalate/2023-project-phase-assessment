@@ -1,17 +1,25 @@
-﻿using Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Common;
 
 namespace Domain.Entites
 {
     public class User : BaseEntity
     {
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;   
+        public User()
+        {
+            Products = new HashSet<Product>();
+            Bookings = new HashSet<Booking>();
+        }
+
+        public string FirstName { set; get; } = null!;
+        public string LastName { set; get; } = null!;
+        public string UserName { set; get; } = null!;
+        public string Email { set; get; } = null!;
+        public string Password { set; get; } = null!;
+        public string? Bio { set; get; } = "";
+        public bool Verified { set; get; } = false;
         public bool IsAdmin { get; set; } = false;
+        
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

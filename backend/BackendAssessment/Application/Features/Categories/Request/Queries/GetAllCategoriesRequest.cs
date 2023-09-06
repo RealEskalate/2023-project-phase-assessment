@@ -1,16 +1,16 @@
-﻿using Application.Dtos.Category;
-using Application.Dtos.Product;
-using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Application.DTOs.Catergories;
+using ErrorOr;
+using MediatR;
 
-namespace Application.Features.Products.Request.Queries
+namespace Application.Features.Categories.Request.Queries
 {
-    public class GetAllCategoriesRequest : IRequest<List<CategoryDto>>
+    public class GetAllCategoriesRequest : IRequest<ErrorOr<List<CategoryResponseDto>>>
     {
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
+        
     }
 }

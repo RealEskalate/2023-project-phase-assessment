@@ -1,20 +1,17 @@
-﻿using Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Common;
 
 namespace Domain.Entites
 {
     public class Product : BaseEntity
     {
-        public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public Category Category { get; set; } = new Category();
-        public int Pricing { get; set; }
-        public bool Availablility { get; set; }
-        public Guid UserId { get; set; }
-        public Guid CategoryId { get; set; }
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public int CatergoryId { get; set; }
+        public int UserId { get; set; }
+        public double Price { get; set; }
+        public bool IsAvailable { get; set; } = true;
+        public virtual Category Category { get; set; } = null!;
+        public virtual User User { get; set; } = null!;
+        
     }
 }

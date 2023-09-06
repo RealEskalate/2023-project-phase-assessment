@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace Infrastructure.Authentication;
 
-namespace Infrastructure.Authentication
-{
-    public class JwtSettings
-    {
-        public const string SectionName = "JwtSettings";
-        public string Secret { get; init; }
-        public string Issuer { get; init; }
-
-        public string Audience { get; init; }
-        public int ExpiryMinutes { get; init; } = 60;
-
-    }
+public class JwtSettings{
+    public const string SectionName = "JwtSettings";
+    public string Secret { get; init; } = null!;
+    public string Issuer { get; init; } = null!;
+    public string Audience { get; init; } = null!;
+    public int ExpirationInHours { get; init; }
 }
