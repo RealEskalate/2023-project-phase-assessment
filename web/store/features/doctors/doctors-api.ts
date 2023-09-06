@@ -4,39 +4,34 @@ const doctorsApi = createApi({
     reducerPath: 'doctors-api',
     baseQuery:fetchBaseQuery({baseUrl:'https://hakimhub-api-dev-wtupbmwpnq-uc.a.run.app/api/v1/'}),
     endpoints: (build)=>({
-        getDoctors:build.mutation({
-            query:((user:User)=>({
+        getDoctors:build.query({
+            query:()=>({
                 url:'search?institutions=false&articles=False',
-                method:'Post',
-            }))
+                method:'POST',
+                body:{}
+            })
         }),
-        getDoctorById:build.mutation({
+        getDoctorById:build.query({
             query:((id:string)=>({
-                url:`doctors/${id}`,
-                method:'Get'
+                url:`users/doctorProfile/${id}`,
+                method:'GET',
             }))
         }),
-        getDoctorBySpeciality:build.mutation({
-            query:((speciality:string)=>({
-                url:`search?institutions=false&articles=False&speciality=${speciality}`,
-                method:'Get'
+        filterByKeyword:build.query({
+            query:((keyword:string)=>({
+                url:`search?keyword=${keyword}&institutions=false&articles=False`,
+                method:'POST',
+                body:{}
             }))
         }),
-        getDoctorByInstitution:build.mutation({
-            query:((institution:string)=>({
-                url:`search?institutions=false&articles=False&institution=${institution}`,
-                method:'Get'
-            }))
-        }),
+
+
 
     })
 })
 
-
-export const {useGetDoctorsMutation,useGetDoctorByIdMutation,useGetDoctorBySpecialityMutation,useGetDoctorByInstitutionMutation} = doctorsApi
-
+export const {useGetDoctorsQuery,useGetDoctorByIdQuery, useFilterByKeywordQuery} = doctorsApi
 export default doctorsApi
 
-// Path: 2023-project-phase-assessment/web/store/features/doctors/doctors-api.ts
-
-                
+               
+// https://hakimhub-api-dev-wtupbmwpnq-uc.a.run.app/api/v1/search?keyword=abe&institutions=false&articles=False

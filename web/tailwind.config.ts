@@ -17,8 +17,10 @@ const config: Config = {
         "primary": "#6C63FF",
       },
       fontFamily: {
-        
-      }
+        'poppins': "var(--font-poppins)",
+        'lato':'var(--font-lato)',
+        'nunito':'var(--font-nunito)',
+      },
     },
   },
   plugins: [],
