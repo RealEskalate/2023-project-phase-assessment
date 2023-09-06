@@ -6,22 +6,6 @@ import Loading from "@/components/Loading";
 import {BsFillTelephoneFill} from 'react-icons/bs'
 import {HiOutlineMail} from 'react-icons//hi'
 
-
-const doctor = {
-  image:
-    "https://res.cloudinary.com/hakimhub/image/upload/v1656314302/POP_DATA_DOC/Addis_Cardiac_Hospital_0.jpg",
-  name: "Tesfaye Bekele",
-  speciality: "Orthopedic",
-  uni: "Addis Ababa University",
-  hosp: "Yekatit 12",
-  uni_1: "Addis Ababa University",
-  uni_2: "Howard medical school",
-  date_1: "2003-2007",
-  date_2: "2007-2011",
-  tel: "0900026618",
-  email: "admas@gmail.com",
-};
-
 interface props {
   params: {
     doctorId: string;
@@ -29,7 +13,6 @@ interface props {
 }
 
 const SingleDoctorPage: React.FC<props> = ({ params }) => {
-  console.log(">>", params);
   const { data, isLoading, isError } = useGetSingleDoctorQuery(params.doctorId);
 
   if (isLoading) {
