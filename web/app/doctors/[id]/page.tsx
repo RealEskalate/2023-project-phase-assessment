@@ -41,7 +41,7 @@ const DoctorPage: React.FC = ({
         </div>
         <div className='w-full flex flex-col items-start justify-start'>
           <h3 className='text-2xl font-semibold text-left my-5'>About</h3>
-          <p className='text-xl text-left'>{doctoritem?.summary}
+          <p className='text-xl text-left'>{doctor?.summary}
           </p>
 
         </div>
