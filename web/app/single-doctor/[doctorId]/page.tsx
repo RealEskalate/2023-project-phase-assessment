@@ -3,6 +3,8 @@
 import React from "react";
 import { useGetSingleDoctorQuery } from "@/store/features/doctor/doctor-api";
 import Loading from "@/components/Loading";
+import {BsFillTelephoneFill} from 'react-icons/bs'
+import {HiOutlineMail} from 'react-icons//hi'
 
 
 const doctor = {
@@ -46,16 +48,14 @@ const SingleDoctorPage: React.FC<props> = ({ params }) => {
 
   return (
     <section>
-      <div className="w-100 mx-10 mt-12">
+      <div className="relative w-100 mx-10 mt-12">
         <img src="/images/heart-machine.png" alt="Stethescope" />
       </div>
-      <img
-        className="mx-auto rounded-full w-40 h-40 -mt-20"
-        src={doctor.photo}
-        alt="doctor photo"
-      />
+      <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <img className="rounded-full border-4 border-sub-primary w-40 h-40" src={doctor.photo} alt="Doctor photo" />
+      </div>
 
-      <div className="w-1/2 mx-16 mt-10">
+      <div className="w-1/2 mx-16 mt-24">
         <div className="flex flex-col justify-between">
           <div className="flex mb-48 justify-between">
             <div>
@@ -63,20 +63,20 @@ const SingleDoctorPage: React.FC<props> = ({ params }) => {
               <p className="text-gray-400">{doctor.speciality[0].name}</p>
             </div>
             <div className="text-gray-400 self-end">
-              <p>{doctor.uni}</p>
-              <p>{doctor.hosp}</p>
+              <p>{"Addis Ababa University"}</p>
+              <p>{doctor.institutionID_list[0].institutionName}</p>
             </div>
           </div>
 
           <div className="flex flex-col">
             <div className="flex flex-col">
               <div className="flex justify-between">
-                <p className="font-semibold">{doctor.uni_1}</p>
-                <p>{doctor.date_1}</p>
+                <p className="font-semibold">{"Addis Ababa University"}</p>
+                <p className="text-gray-400">{"2003-2007"}</p>
               </div>
               <div className="flex justify-between">
-                <p className="font-semibold">{doctor.uni_2}</p>
-                <p>{doctor.date_2}</p>
+                <p className="font-semibold">{"Harvard University"}</p>
+                <p className="text-gray-400">{"2007-2011"}</p>
               </div>
             </div>
           </div>
@@ -84,14 +84,22 @@ const SingleDoctorPage: React.FC<props> = ({ params }) => {
           <div className="mt-4">
             <div>
               <p className="font-semibold my-8">Contact Info</p>
-              <p className="mb-2 text-sub-primary font-semibold">
-                Phone Number
-              </p>
-              <p>{doctor.tel}</p>
+              <div className="flex gap-6">
+                <BsFillTelephoneFill />
+                <p className="mb-2 text-sub-primary font-semibold">
+                  Phone Number
+                </p>
+              </div>
+              <p className="text-gray-400 px-8">{"+251900026618"}</p>
             </div>
-            <div>
-              <p className="mt-2 mb-2 text-sub-primary font-semibold">Email</p>
-              <p>{doctor.email}</p>
+            <div className="mt-4">
+              <div className="flex gap-6">
+                <HiOutlineMail />
+                <p className="mb-2 text-sub-primary font-semibold">
+                  Email
+                </p>
+              </div>
+              <p className="text-gray-400 px-8">{"MohammedBedru@gmail.com"}</p>
             </div>
           </div>
         </div>

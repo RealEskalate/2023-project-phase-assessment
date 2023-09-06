@@ -30,7 +30,7 @@ const DoctorCard: React.FC<doctorCardProps> = ({
       onClick={() => handleCardClick(id)}
     >
       <div className="flex justify-center items-center mb-4">
-        <img src={photoUrl} alt={name} className="rounded-full w-20 h-20" />
+        <img src={photoUrl} alt={name} className="rounded-full w-20 h-20 border-4 border-sub-primary" />
       </div>
       <h2 className="text-xl font-semibold mb-2">{name}</h2>
       <div className="bg-sub-primary text-white rounded-full inline-block py-1 px-4 mb-2">
