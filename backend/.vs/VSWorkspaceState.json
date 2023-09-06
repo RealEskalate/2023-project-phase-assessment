@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BackendAssessment"
+    "\\BackendAssessment",
+    "\\BackendAssessment\\Infrastructure"
   ],
-  "SelectedNode": "\\BackendAssessment\\BackendAssessment.sln",
+  "SelectedNode": "\\BackendAssessment\\Infrastructure\\Infrastructure.csproj",
   "PreviewInSolutionExplorer": false
 }
