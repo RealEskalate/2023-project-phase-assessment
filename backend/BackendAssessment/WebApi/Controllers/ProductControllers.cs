@@ -1,4 +1,6 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Application.DTO.Booking;
 using Application.DTO.Product;
 using Application.Features.Booking.Command.CreateBooking;
@@ -24,6 +26,7 @@ public class ProductControllers : ControllerBase
         _mediator = mediator;
     }
 
+    [Authorize]
     [HttpGet("All")]
     public async Task<ActionResult<List<ProductResponseDto>>> GetAll()
     {
