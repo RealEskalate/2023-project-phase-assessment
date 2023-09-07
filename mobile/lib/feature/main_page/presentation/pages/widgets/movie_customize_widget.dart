@@ -1,70 +1,61 @@
 import 'package:flutter/material.dart';
 
 class CustomizeMovieWidget extends StatelessWidget {
-  final String title, distribution, image;
-  final int rate;
-  const CustomizeMovieWidget(
-      {super.key,
-      required this.title,
-      required this.rate,
-      required this.distribution,
-      required this.image});
+  const CustomizeMovieWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
-          ),
+    return Container(
+      width: 200,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("asset/12.jpg"),
+          fit: BoxFit.cover,
         ),
-        child: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-              child: Image(
-                image: AssetImage(image),
-                fit: BoxFit.cover,
-                height: 80,
-                width: 60,
-              ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: FractionalTranslation(
+          translation: Offset(0, -0.1),
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
-            SizedBox(
-              width: 50,
-            ),
-            Column(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text("$title"),
+                Text("Autobiography"),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       children: [
                         Icon(
-                          Icons.star,
+                          Icons.access_alarm_rounded,
                         ),
-                        Text(
-                          "$rate",
-                        ),
+                        Text("1 Hour"),
                       ],
                     ),
+                    SizedBox(width: 10,),
                     Row(
                       children: [
                         Icon(
-                          Icons.timer_3_rounded,
+                          Icons.star,
+                          color: Colors.amber,
                         ),
-                        Text(distribution),
+                        Text("7.5"),
                       ],
                     ),
                   ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

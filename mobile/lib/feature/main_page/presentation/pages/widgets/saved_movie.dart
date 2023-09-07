@@ -1,73 +1,79 @@
 import 'package:flutter/material.dart';
 
-class SavedMovieWidget extends StatelessWidget {
-  final String catagory, distribution, image;
-  final int rate;
-  const SavedMovieWidget({
-    super.key,
-    required this.catagory,
-    required this.distribution,
-    required this.rate,
-    required this.image,
-  });
+class MovieColWidget extends StatelessWidget {
+  const MovieColWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Stack(
+      padding: const EdgeInsets.all(12.0),
+      child: Container(
+        height: 180,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(15),),
-              child: Image(
-                  image: AssetImage(image),
+            Expanded(
+              flex: 30,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+                child: Image(
+                  image: AssetImage("asset/12.jpg"),
                   fit: BoxFit.cover,
-                  height: 200,
-                  width: 140,
-                ),
-            ),
-            Positioned(
-              top: 150,
-              left: 20,
-              child: Container(
-                height: 40,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(catagory),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(children: [
-                          Icon(
-                            Icons.star,
-                          ),
-                          Text(
-                            "$rate",
-                          ),
-                        ]),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.timer_3_rounded,
-                            ),
-                            Text(distribution),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
                 ),
               ),
             ),
+            Spacer(
+              flex: 30,
+            ),
+            Expanded(
+              flex: 30,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "Autobiography",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_alarm_rounded,
+                          ),
+                          Text("1 Hour"),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          Text("7.5"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
+        ),
       ),
     );
   }

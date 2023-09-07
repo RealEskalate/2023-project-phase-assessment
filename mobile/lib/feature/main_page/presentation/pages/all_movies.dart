@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second/feature/main_page/presentation/bloc/search/bloc/search_bloc.dart';
@@ -6,203 +10,146 @@ import 'package:second/feature/main_page/presentation/pages/widgets/saved_movie.
 import 'widgets/customize_text_field.dart';
 import 'widgets/movie_customize_widget.dart';
 
-class AllMoviePage extends StatelessWidget {
-  final TextEditingController searchController = TextEditingController();
-  bool isNotSearching = true;
-  AllMoviePage({super.key});
+class AllMovieMainPage extends StatefulWidget {
+  const AllMovieMainPage({super.key});
 
+  @override
+  State<AllMovieMainPage> createState() => _AllMovieMainPageState();
+}
+
+class _AllMovieMainPageState extends State<AllMovieMainPage> {
+  bool isNotSearching = true;
+  final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(213, 230, 249, 1),
         title: Center(
           child: Text("Alem Cinema"),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: const Color.fromARGB(255, 226, 222, 222),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
+      body: Container(
+        color: Color.fromRGBO(213, 230, 249, 1),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 10,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        setState(() {
+                          isNotSearching = true;
+                        });
+                      } else {
+                        setState(() {
+                          isNotSearching = false;
+                        });
+                        BlocProvider.of<SearchBloc>(context).add(
+                          SearchEventClick(movieName: value),
+                        );
+                      }
+                    },
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Color.fromARGB(123, 242, 255, 255),
+                      hintText: "Looking Forward",
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
                       ),
-                      child: CustomizeTextField(
-                        hint: "Lookin for shows",
-                        controller: searchController,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.search,
-                          size: 30,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
                         ),
-                        label: Text(""),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-              isNotSearching
-                  ? IsNotSearching()
-                  : BlocBuilder<SearchBloc, SearchState>(
-                      builder: (context, state) {
-                        if (state is LoadingSearchState) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        else if (state is SuccessSearchState){
-                          return ListView.builder(itemBuilder: (index){
-                            return CustomizeMovieWidget(distribution: state.movies.,);
-                          })
-                        }
-                      },
-                    ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MoviesColumn extends StatelessWidget {
-  const MoviesColumn({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          CustomizeMovieWidget(
-            title: "fun",
-            distribution: "1h",
-            rate: 8,
-            image: "asset/12.jpg",
-          ),
-          CustomizeMovieWidget(
-            title: "fun",
-            distribution: "1h",
-            rate: 8,
-            image: "asset/12.jpg",
-          ),
-          CustomizeMovieWidget(
-            title: "fun",
-            distribution: "1h",
-            rate: 8,
-            image: "asset/12.jpg",
-          ),
-          CustomizeMovieWidget(
-            title: "fun",
-            distribution: "1h",
-            rate: 8,
-            image: "asset/12.jpg",
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class IsNotSearching extends StatelessWidget {
-  const IsNotSearching({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+            ),
+            Expanded(
+              flex: 30,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    "saved book mark",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+                  Expanded(
+                    flex: 15,
+                    child: Container(
+                      color: Color.fromARGB(123, 242, 255, 255),
+                      child: ListTile(
+                        title: Text("Saved Movies"),
+                        trailing: Icon(
+                          Icons.bookmark_border,
+                        ),
+                      ),
                     ),
                   ),
-                  Icon(
-                    Icons.bookmark_border,
-                    color: Colors.blue,
+                  Expanded(
+                    flex: 85,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0),
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          viewportFraction: 0.58,
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
+                          enlargeCenterPage: true,
+                        ),
+                        items: [1, 2, 3, 4, 5].map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return CustomizeMovieWidget();
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 60,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: Container(
+                      color: Color.fromARGB(123, 242, 255, 255),
+                      child: ListTile(
+                        title: Text("All Movies"),
+                        trailing: Icon(
+                          Icons.movie,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 92,
+                    child: ListView(
+                      children: [
+                        MovieColWidget(),
+                        MovieColWidget(),
+                        MovieColWidget(),
+                        MovieColWidget(),
+                        MovieColWidget(),
+                        MovieColWidget(),
+
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SavedMovieWidget(
-                  catagory: "fun",
-                  distribution: "1h",
-                  rate: 8,
-                  image: "asset/12.jpg",
-                ),
-                SavedMovieWidget(
-                  catagory: "fun",
-                  distribution: "1h",
-                  rate: 8,
-                  image: "asset/12.jpg",
-                ),
-                SavedMovieWidget(
-                  catagory: "fun",
-                  distribution: "1h",
-                  rate: 8,
-                  image: "asset/12.jpg",
-                ),
-                SavedMovieWidget(
-                  catagory: "fun",
-                  distribution: "1h",
-                  rate: 8,
-                  image: "asset/12.jpg",
-                ),
-                SavedMovieWidget(
-                  catagory: "fun",
-                  distribution: "1h",
-                  rate: 8,
-                  image: "asset/12.jpg",
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "all movies",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 300,
-            child: MoviesColumn(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

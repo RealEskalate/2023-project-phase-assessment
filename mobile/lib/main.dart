@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:second/feature/homepage/presentation/pages/home_page.dart';
 import 'package:second/feature/main_page/presentation/pages/all_movies.dart';
 
+import 'feature/main_page/presentation/pages/detail_movie.dart';
+
 void main() {
   runApp( ScreenUtilInit(
         designSize: const Size(338, 717),
@@ -12,7 +14,7 @@ void main() {
             home: child,
           );
         },
-        child: AllMoviePage(),
+        child: AllMovieMainPage(),
       ),);
 }
 
