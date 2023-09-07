@@ -47,7 +47,7 @@ public class UsersControllers : ControllerBase
     }
     
     
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     public async Task<ActionResult<UserResponseDto>> Update(int id, [FromBody] CreateUserDto createUserDto)
     {
         return await _mediator.Send(new UpdateUserCommand(){UserId = id, CreateUserDto = createUserDto});

@@ -1,7 +1,8 @@
 using Application.Contracts.Services;
-using Infrastructure.Services.JwtTokenGenerator;
+using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Services;
 
 namespace Infrastructure;
 

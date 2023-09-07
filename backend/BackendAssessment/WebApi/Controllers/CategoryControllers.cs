@@ -17,7 +17,7 @@ public class CategoryControllers : ControllerBase
         _mediator = mediator;
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> Get(int id)
     {
         var query = new GetCategoryByIdQuery() { Id = id };

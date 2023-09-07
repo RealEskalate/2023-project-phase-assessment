@@ -1,6 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using Application.DTO.Booking;
 using Application.DTO.Product;
 using Application.Features.Booking.Command.CreateBooking;
@@ -9,6 +8,7 @@ using Application.Features.Product.Commands.DeleteUser;
 using Application.Features.Product.Commands.UpdateProduct;
 using Application.Features.Product.Queries.GetAllProducts;
 using Application.Features.Product.Queries.GetProductById;
+using CloudinaryDotNet.Actions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,21 +26,26 @@ public class ProductControllers : ControllerBase
         _mediator = mediator;
     }
 
-    [Authorize]
     [HttpGet("All")]
     public async Task<ActionResult<List<ProductResponseDto>>> GetAll()
     {
+        foreach (var claim in User.Claims)
+        {
+            Console.WriteLine(claim.Type);
+            Console.WriteLine(claim.Value);
+        }
         var prods = await _mediator.Send(new GetAllProductQuery());
         return Ok(prods);
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductResponseDto>> GetById(int id)
     {
         var prod = await _mediator.Send(new GetProductByIdQuery() {ProdId = id});
         return Ok(prod);
     }
     
+    [Authorize(Roles = "Admin")]
     [HttpPost()]
     public async Task<ActionResult<ProductResponseDto>> Create([FromBody] CreateProdDto prod)
     {
@@ -48,15 +53,16 @@ public class ProductControllers : ControllerBase
         return CreatedAtAction(nameof(GetById), new{Id = newProd.Id}, newProd);
     }
     
-    [Authorize]
     [HttpPost("Book/{prodId:int}")]
     public async Task<ActionResult<ProductResponseDto>> Book(int prodId, BookingDto bookingDto)
     {
-        var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)!.Value;
+        var userId = User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sid)!.Value;
+        Console.WriteLine(userId);
         var bookedProd = await _mediator.Send(new CreateBookingCommand() { UserId = int.Parse(userId),BookingDto = bookingDto});
         return Ok(bookedProd);
     }
     
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<ActionResult<ProductResponseDto>> Update(int id, [FromBody] CreateProdDto prod)
     {
@@ -64,7 +70,8 @@ public class ProductControllers : ControllerBase
         return Ok(updatedProd);
     }
     
-    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id:int}")]
     public async Task<ActionResult> Delete(int id)
     {
         await _mediator.Send(new DeleteProductCommand() {ProdId = id});
